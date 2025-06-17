@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function add(){
+            //수1/수2의 값을 읽어온다
+            let su1 = document.getElementById("su1").value;
+            let su2 = document.getElementById("su2").value;
+
+            //문자열->숫자로 변환하는 함수
+            //parseInt("123")  ->  123 
+
+            //계산하기
+            let result = parseInt(su1) + parseInt(su2);
+
+            //결과창에 넣는다
+            document.getElementById("result").value = result;
+        }
+    </script>
+</head>
+<body>
+    <!-- 1 line -->
+    <div>
+        <label for="">수1:</label>
+        <input id="su1" value="0">
+    </div>
+    <!-- 2 line -->
+    <div>
+        <label for="">수2:</label>
+        <input id="su2" value="0">
+    </div>
+    <!-- 3 line -->
+    <div>
+        <hr>
+        <button onclick="add();">더하기</button>
+        <button>빼기</button>
+        <button>곱하기</button>
+        <button>나누기</button>
+        <button>나머지</button>
+        <button>제곱승</button>
+        <button>미스터리 버튼</button>
+        <hr>
+    </div>
+    <!-- 4 line -->
+    <div>
+        <label for="">결과:</label>
+        <input id="result">
+    </div>
+</body>
+</html>
