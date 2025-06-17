@@ -13,15 +13,18 @@
 
     -->
 
-    <!-- 선언적 방식 -->
+    <!-- 2.선언적 방식 -->
      <script>
             // 함수선언
             function hello() 
             {
-                window.alert("내도 반갑습니데이")
+                window.alert("내도 반갑습니데이");
             }
 
      </script>
+
+     <!-- 3.external(외부파일) -->
+    <script src="myscript.js"></script>
 </head>
 <body>
     <!-- Javascript inline방식 -->
@@ -30,6 +33,6 @@
     <!-- javascript internal방식 -->
     <button onclick="javascript:hello();">반갑습니다</button>
 
-    <button onclick="">또만나요</button>
+    <button onclick="hi();">또만나요</button>
 </body>
 </html>
