@@ -19,6 +19,36 @@
             //결과창에 넣는다
             document.getElementById("result").value = result;
         }
+        function minus(){
+            let su1 = document.getElementById("su1").value;
+            let su2 = document.getElementById("su2").value;
+            let result = parseInt(su1) - parseInt(su2);
+            document.getElementById("result").value = result;
+        }
+        function multiply(){
+            let su1 = document.getElementById("su1").value;
+            let su2 = document.getElementById("su2").value;
+            let result = parseInt(su1) * parseInt(su2);
+            document.getElementById("result").value = result;
+        }
+        function divide(){
+            let su1 = document.getElementById("su1").value;
+            let su2 = document.getElementById("su2").value;
+            let result = parseInt(su1) / parseInt(su2);
+            document.getElementById("result").value = result;
+        }
+        function remainder(){
+            let su1 = document.getElementById("su1").value;
+            let su2 = document.getElementById("su2").value;
+            let result = parseInt(su1) % parseInt(su2);
+            document.getElementById("result").value = result;
+        }
+        function exponent(){
+            let su1 = document.getElementById("su1").value;
+            let su2 = document.getElementById("su2").value;
+            let result = parseInt(su1) ** parseInt(su2);
+            document.getElementById("result").value = result;
+        }
     </script>
 </head>
 <body>
@@ -35,19 +65,35 @@
     <!-- 3 line -->
     <div>
         <hr>
-        <button onclick="add();">더하기</button>
-        <button>빼기</button>
-        <button>곱하기</button>
-        <button>나누기</button>
-        <button>나머지</button>
-        <button>제곱승</button>
-        <button>미스터리 버튼</button>
+        <button onclick="add();">
+            <img src="./더하기.png" alt=""
+            width="100px" height="100px">
+        </button>
+        <button onclick="minus();"><img src="./빼기.png" alt=""
+            width="100px" height="100px"></button>
+            
+        <button onclick="multiply();">
+            <img src="./곱하기.png" alt=""
+            width="100px" height="100px">
+        </button>
+        <button onclick="divide();">
+            <img src="./나누기.png" alt=""
+            width="100px" height="100px">
+        </button>
+        <button onclick="remainder();">
+            <img src="./나머지.png" alt=""
+            width="100px" height="100px">
+        </button>
+        <button onclick="exponent()">
+            <img src="./제곱승.png" alt=""
+            width="100px" height="100px">
+        </button>
         <hr>
     </div>
     <!-- 4 line -->
     <div>
         <label for="">결과:</label>
-        <input id="result">
+        <input id="result" value="0">
     </div>
 </body>
 </html>
