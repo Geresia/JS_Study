@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function test_var(){
+        a = 10;
+        var a; //hoisting(사용하는 변수를 미리 위쪽에 생성)
+
+        a = "안녕";
+
+        console.log("hoisting된 a : ",a);
+        //alert(a);
+         
+        }
+
+        function test_let(){
+            
+            //변수
+            let local_a = 10;
+            
+            {  
+                //지역변수
+                let local_a = 100;
+                local_a = local_a * 2;
+            }
+
+            console.log("local_a:", local_a);
+
+            local_a = 100;
+
+            let b;
+            b = 10;
+            b = 100;//reassign(재대입)
+            console.log("hoisting안된 b: ",b);
+
+        }
+
+        function test_const(){
+            //상수
+            const PI = 3.14;
+            //PI = 3.141592()
+        }
+
+        a = 100;
+        console.log("외부로 나온 a:", a);
+
+        b = 1000;
+        console.log('외부로 나온 b:')
+
+        //함수호출
+        test_var();
+        test_const();
+        test_let();
+        </script>
+</head>
+<body>
+    
+</body>
+</html>
