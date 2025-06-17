@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function hello_kor()
+        {
+            // alert("췍췍 암 코리안 먕럼넹ㄹ매ㅑㅇ러")
+            // Javascript DOM API
+            document.getElementById("msg").innerHTML = "외국에서 여행온 사람 길 물어보는거 해봅시다";
+
+            //input 값넣기
+            document.getElementById("msg2").value = "안사요";
+        }
+    </script>
+    <script>
+        function hello_eng()
+        {
+            document.getElementById("msg").innerHTML = "외국 여행중 길 물어보는거 해봅시다";
+            //input 값넣기
+            document.getElementById("msg2").value = "Hello... 혹시 한국사람이신가요?";
+        }
+    </script>
+    <script>
+        function hello_jpn()
+        {
+            // Debug
+            console.log("call hello_jpn()")
+            document.getElementById("msg").innerHTML = "일본에서 여행온 사람 길 물어보는거 해봅시다";
+            //input 값넣기
+            document.getElementById("msg2").value = "아노... 독. 독도는 한국땅이다!";
+        }
+
+        function write1(){
+            document.write("document를 이용해서 출력해봄!!!");
+
+        }
+    </script>
+    <style>
+        button{
+            margin-top: 15px;;
+        }
+        input{
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+    <p id="msg">여기에 인사말 출력해보기</p>
+    <input id="msg2" value="여기도 메시지 넣어줘"><br>
+    <button onclick="hello_kor()">한쿡말</button>
+    <button onclick="hello_eng()">이글리시</button>
+    <button onclick="hello_jpn()">니혼진</button>
+
+    <button onclick="write1();">document.write():body부분에 출력</button>
+</body>
+</html>
+
+<!-- 자바에는 window라는 객채가 있는데 
+ 전반적으로 창 브라우저 기준으로 관리하는 객채가 window객채 
+ 문서 중심 document는 문서를 관리하는 객채이다
+ 브라우저 BOM(Browser Object Model)
+ DOMG(Document Object model) -->
