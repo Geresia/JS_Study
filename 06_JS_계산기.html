@@ -1,99 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        function add(){
-            //수1/수2의 값을 읽어온다
-            let su1 = document.getElementById("su1").value;
-            let su2 = document.getElementById("su2").value;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <script>
+    // 1~5자리 정수 + 소수점 이하 최대 2자리 숫자
+    const regular_number = /^[0-9]{1,5}(\.[0-9]{1,2})?$/;
 
-            //문자열->숫자로 변환하는 함수
-            //parseInt("123")  ->  123 
+    function add() {
+      let su1 = document.getElementById("su1").value;
+      let su2 = document.getElementById("su2").value;
 
-            //계산하기
-            let result = parseInt(su1) + parseInt(su2);
+      // su1 유효성 검사
+      if (!regular_number.test(su1)) {
+        alert("1~5자리 정수 및 소수점 이하 최대 2자리 숫자만 입력하세요!");
+        document.getElementById("su1").value = "";
+        document.getElementById("su1").focus();
+        return;
+      }
+      // su2 유효성 검사
+      if (!regular_number.test(su2)) {
+        alert("11~5자리 정수 및 소수점 이하 최대 2자리 숫자만 입력하세요!");
+        document.getElementById("su2").value = "";
+        document.getElementById("su2").focus();
+        return;
+      }
 
-            //결과창에 넣는다
-            document.getElementById("result").value = result;
-        }
-        function minus(){
-            let su1 = document.getElementById("su1").value;
-            let su2 = document.getElementById("su2").value;
-            let result = parseInt(su1) - parseInt(su2);
-            document.getElementById("result").value = result;
-        }
-        function multiply(){
-            let su1 = document.getElementById("su1").value;
-            let su2 = document.getElementById("su2").value;
-            let result = parseInt(su1) * parseInt(su2);
-            document.getElementById("result").value = result;
-        }
-        function divide(){
-            let su1 = document.getElementById("su1").value;
-            let su2 = document.getElementById("su2").value;
-            let result = parseInt(su1) / parseInt(su2);
-            document.getElementById("result").value = result;
-        }
-        function remainder(){
-            let su1 = document.getElementById("su1").value;
-            let su2 = document.getElementById("su2").value;
-            let result = parseInt(su1) % parseInt(su2);
-            document.getElementById("result").value = result;
-        }
-        function exponent(){
-            let su1 = document.getElementById("su1").value;
-            let su2 = document.getElementById("su2").value;
-            let result = parseInt(su1) ** parseInt(su2);
-            document.getElementById("result").value = result;
-        }
-    </script>
+      let result = parseFloat(su1) + parseFloat(su2);
+      document.getElementById("result").value = result;
+    }
+
+    function minus() {
+      let su1 = document.getElementById("su1").value;
+      let su2 = document.getElementById("su2").value;
+      document.getElementById("result").value = parseFloat(su1) - parseFloat(su2);
+    }
+
+    function multiply() {
+      let su1 = document.getElementById("su1").value;
+      let su2 = document.getElementById("su2").value;
+      document.getElementById("result").value = parseFloat(su1) * parseFloat(su2);
+    }
+
+    function divide() {
+      let su1 = document.getElementById("su1").value;
+      let su2 = document.getElementById("su2").value;
+      if (parseFloat(su2) === 0) {
+        alert("0으로 나눌 수 없습니다!");
+        return;
+      }
+      document.getElementById("result").value = (su1) / (su2);
+    }
+
+    function remainder() {
+      let su1 = document.getElementById("su1").value;
+      let su2 = document.getElementById("su2").value;
+      if (parseFloat(su2) === 0) {
+        document.getElementById("su1").value=0;
+        return;
+      }
+      document.getElementById("result").value = (su1) % (su2);
+    }
+
+    function exponent() {
+      let su1 = document.getElementById("su1").value;
+      let su2 = document.getElementById("su2").value;
+      document.getElementById("result").value = parseFloat(su1) ** parseFloat(su2);
+    }
+  </script>
 </head>
 <body>
-    <!-- 1 line -->
-    <div>
-        <label for="">수1:</label>
-        <input id="su1" value="0">
-    </div>
-    <!-- 2 line -->
-    <div>
-        <label for="">수2:</label>
-        <input id="su2" value="0">
-    </div>
-    <!-- 3 line -->
-    <div>
-        <hr>
-        <button onclick="add();">
-            <img src="./더하기.png" alt=""
-            width="100px" height="100px">
-        </button>
-        <button onclick="minus();"><img src="./빼기.png" alt=""
-            width="100px" height="100px"></button>
-            
-        <button onclick="multiply();">
-            <img src="./곱하기.png" alt=""
-            width="100px" height="100px">
-        </button>
-        <button onclick="divide();">
-            <img src="./나누기.png" alt=""
-            width="100px" height="100px">
-        </button>
-        <button onclick="remainder();">
-            <img src="./나머지.png" alt=""
-            width="100px" height="100px">
-        </button>
-        <button onclick="exponent()">
-            <img src="./제곱승.png" alt=""
-            width="100px" height="100px">
-        </button>
-        <hr>
-    </div>
-    <!-- 4 line -->
-    <div>
-        <label for="">결과:</label>
-        <input id="result" value="0">
-    </div>
+  <div>
+    <label for="su1">수1:</label>
+    <input id="su1" type="text" value="0" />
+  </div>
+  <div>
+    <label for="su2">수2:</label>
+    <input id="su2" type="text" value="0" />
+  </div>
+  <div>
+    <hr />
+    <button type="button" onclick="add()">
+      <img src="./더하기.png" alt="+" width="100" height="100" />
+    </button>
+    <button type="button" onclick="minus()">
+      <img src="./빼기.png" alt="−" width="100" height="100" />
+    </button>
+    <button type="button" onclick="multiply()">
+      <img src="./곱하기.png" alt="×" width="100" height="100" />
+    </button>
+    <button type="button" onclick="divide()">
+      <img src="./나누기.png" alt="÷" width="100" height="100" />
+    </button>
+    <button type="button" onclick="remainder()">
+      <img src="./나머지.png" alt="%" width="100" height="100" />
+    </button>
+    <button type="button" onclick="exponent()">
+      <img src="./제곱승.png" alt="^" width="100" height="100" />
+    </button>
+    <hr />
+  </div>
+  <div>
+    <label for="result">결과:</label>
+    <input id="result" type="text" value="0" readonly />
+  </div>
 </body>
 </html>
