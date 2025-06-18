@@ -1,88 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <script>
-
-        function 산술연산자(){
-            //산술연산자 : + - * ** / %
-            let a = 10;
-            let b = 3;
-            document.write("<h3>산술연산자</h3>")
-            document.write(a + " + " + b + " =  " + (a+b) + "<br>");
-            document.write(a + " - " + b + " =  " + (a-b) + "<br>");
-            document.write(a ** b + "<br>");
-            //backtick : 키보드 ~ 밑에 ` -> ${변수명}
-            document.write(`${a} + ${b} = ${ a*b }<br>`);
-            document.write(`${a} / ${b} = ${ a/b }<br>`);
-            document.write(`${a} ** ${b} = ${ a**b }<br>`);
-            document.write(`${a} % ${b} = ${ a%b }<br>`);
-            
-        }
-        
-        
-        function 대입연산자(){
-           let n = 0;
-            document.write("<h3>대입연산자</h3>");
-
-            n = 10;    document.write(`n = 10 : ${n} <br>`);
-
-            n += 10;  // n = n + 10;
-            n =+ 5;
-            document.write(`n += 10 → n : n + 10 : ${n} <br>`);
-
-            n *= 5;
-            document.write(`n *= 5 → n : n * 5:= ${n} <br>`);
-            
-            n /= 5;
-            document.write(`n /= 5 → n : n / 5 : ${n} <br>`);
-            
-            n = 5;
-            n **= 2; // n = n ** 2
-            document.write(`n **= 2 : ${n} <br>`);
-
-            n %= 2; // n = n ** 2
-            document.write(`n %= 2 : ${n} <br>`);
-
-            function 관계연산자(){
-                //관계연산자 : > >= < <= 
-                //              == != (값 == 값) 
-                //              === ==! (값+타입==값+타입)
-
-                let a = 3; //Number
-                let b = 2;
-                let c = "3"; //String
-                
-                document.write("<h3>관계연산자</h3>");
-                document.write("<pre>");
-                    document.write(`${a} > ${b} : ${ a>b }<br>`);
-                    document.write(`${a} >= ${b} : ${ a>=b }<br>`);
-                    document.write(`${a} < ${b} : ${ a<b }<br>`);
-                    document.write(`${a} <= ${b} : ${ a<=b }<br>`);
-                    document.write(`${a} == ${b} : ${ a==b }<br>`);
-                    document.write(`${a} != ${b} : ${ a!=b }<br>`);
-                    document.write("<pre>");
-                    
-                    document.write(`${a} == ${c} : ${ a==c }<br>`);
-
-                    document.write(`${a} === ${c} : ${ a===c }<br>`);
-                    document.write(`${a} !== ${c} : ${ a!==c }<br>`)
-                    }
-            관계연산자();
-            n -= 5; // n n - 5 ;
-        }
-        // 함수 호출
-
-        
-        산술연산자();
-        대입연산자();
-    </script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
 </head>
 <body>
+  <script>
+    function 산술연산자() {
+      let a = 10;
+      let b = 3;
+      document.write("<h3>산술연산자</h3>")
+      document.write(a + " + " + b + " = " + (a + b) + "<br>");
+      document.write(a + " - " + b + " = " + (a - b) + "<br>");
+      document.write(`${a} ** ${b} = ${a ** b}<br>`);
+      document.write(`${a} * ${b} = ${a * b}<br>`);
+      document.write(`${a} / ${b} = ${a / b}<br>`);
+      document.write(`${a} % ${b} = ${a % b}<br>`);
+    }
+
+    function 대입연산자() {
+      let n = 0;
+      document.write("<h3>대입연산자</h3>");
+
+      n = 10; document.write(`n = 10 : ${n} <br>`);
+
+      n += 10;
+      n = +5; // "양수 5를 대입"
+      document.write(`n = +5 → n : ${n} <br>`);
+
+      n *= 5;
+      document.write(`n *= 5 → n * 5 : ${n} <br>`);
+
+      n /= 5;
+      document.write(`n /= 5 → n / 5 : ${n} <br>`);
+
+      n = 5;
+      n **= 2;
+      document.write(`n **= 2 : ${n} <br>`);
+
+      n %= 2;
+      document.write(`n %= 2 : ${n} <br>`);
+
+      function 관계연산자() {
+        let a = 3;
+        let b = 2;
+        let c = "3";
+
+        document.write("<h3>관계연산자</h3>");
+        document.write(`${a} > ${b} : ${a > b}<br>`);
+        document.write(`${a} >= ${b} : ${a >= b}<br>`);
+        document.write(`${a} < ${b} : ${a < b}<br>`);
+        document.write(`${a} <= ${b} : ${a <= b}<br>`);
+        document.write(`${a} == ${b} : ${a == b}<br>`);
+        document.write(`${a} != ${b} : ${a != b}<br>`);
+        document.write(`${a} == "${c}" : ${a == c}<br>`);
+        document.write(`${a} === "${c}" : ${a === c}<br>`);
+        document.write(`${a} !== "${c}" : ${a !== c}<br>`);
+      }
+
+      관계연산자();
+      n -= 5;
+    }
+
+    function 단항연산자() {
+      document.write("<h3>단항연산자</h3>");
+      let a = 3;
+      let b = 2;
+      let bResult = !(a > b);
+
+      document.write(`!(${a} > ${b}) : ${bResult}<br>`);
+      document.write(`!true : ${!true}<br>`);
+      document.write(`!false : ${!false}<br>`);
+
+      // 증감 연산자
+      let n = 10;
+      document.write(`n = ${n}<br>`);
+      n++;
+      document.write(`n++ 후 n = ${n}<br>`);
+      n--;
+      document.write(`n-- 후 n = ${n}<br>`);
+
+      let m1 = ++n + 10;
+      document.write(`++n + 10 = ${m1}  <br>`); // 전위형
+
+      n = 10;
+      let m2 = n++ + 10;
+      document.write(`n++ + 10 = ${m2}<br>`); // 후위형
+      document.write(`n = ${n}<br>`); // 후위형 이후 증가 확인
+
+      //부호 연산자(음수표지)
+      n = -100;
+      m = n;
+      if(n<0)
+            m = -n;
+      document.write(`|${n}| = ${m}<br>`);
+
+      // ~ (tilde) : 이진논리 not 연산자
+      //            0 -> 1
+      //            1 -> 0
+        n = 10;
+        m = n.toString(2);
+        document.write(`${n} 2진수  : ${m} <br>`);
+        //              n = 1010
+        //             ~n = 0101
+        //                  1011
+        //n = ~n;
+        document.write(`~${ n.toString(2) } : ${ ~n.toString(2)} <br>`)
+
+        n = 10;
+        m = n.toString(2); // "1010"
+        document.write(`${n}의 2진수 : ${m}<br>`);
+        document.write(`~${n} (=${~n})의 2진수 : ${~n.toString(2)}<br>`);
+
+
+
+
+        document.write(toBinary(n) + "<br>");
+        document.write(toBinary(n) + "<br>");
+        document.write(toBinary(n) + "<br>");
+        
+
+    }
+
+    function toBinary(n){
+        let binary="";
+
+        for(i=31;i>=0;i--){
+            binary += (n >>> i & 1) + '';
+        }
+        return binary;
+    }
     
+
+    function 일반논리연산자(){
+
+        //일반논리연산자 : &&  ||
+        //               A && B : A와Ba모두 참이어야 참
+        //               A || B : A 또는 B
+        document.write("<h3>일반논리연산자</h3>");
+
+        document.write (`true && true  : ${ true && true }   <br>`);
+        document.write (`true && false : ${ true && false }  <br>`);
+        document.write (`true && false : ${ true && false }  <br>`);
+        document.write (`true && true  : ${ true || true }   <br>`);
+        document.write (`true && false : ${ true || false }  <br>`);
+        document.write (`false && false : ${ false || false }<br>`);
+
+    }
+
+    // 실행
+    산술연산자();
+    대입연산자();
+    단항연산자();
+    일반논리연산자();
+  </script>
 </body>
 </html>
