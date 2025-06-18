@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMI 계산기</title>
+
+  <script>
+    function calculateBMI() {
+      const reNum = /^[0-9]{1,5}(\.[0-9]{1,2})?$/;
+      const h = isNaN(document.getElementById('height').value);
+      const w = isNaN(document.getElementById('weight').value);
+
+      // 입력 유효성 검사
+      if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
+        alert('신장과 체중에 올바른 숫자를 입력해주세요.');
+        return;
+      }
+
+
+      const heightM = h / 100;
+      const bmi = w / (heightM * heightM);
+
+      let grade;
+      if(bmi>=25) = "비만";
+      if(bmi>=23 && bmi <=25) = "과체중";
+      if(bmi>=18.5 && bmi <=23) = "정상";
+      if(bmi <=18.5) = "저체중";
+
+      // 결과 출력
+      document.getElementById('result').innerHTML =
+        `BMI는 <strong>${bmiRounded}</strong> 이며, 판정 결과는 <strong>${grade}</strong> 입니다.`;
+    }
+  </script>
+
+</head>
+<body>
+  <h2>BMI 계산기</h2>
+  <div class="row">
+    <label for="height">신장(cm):</label>
+    <input id="height" type="text">
+  </div>
+  <div class="row">
+    <label for="weight">체중(kg):</label>
+    <input id="weight" type="text">
+  </div>
+  <div class="row">
+    <button type="button" onclick="calculateBMI()">계산하기</button>
+  </div>
+
+  <div id="result"></div>
+
+  
+</body>
+</html>
