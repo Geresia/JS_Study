@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI 계산기</title>
+
+<script>
+    function calculateBMI() {
+      // 1~5자리 정수 + 소수점 이하 최대 2자리 허용
+      const reNum = /^[0-9]{1,5}(\.[0-9]{1,2})?$/;
+
+      const hRaw = document.getElementById('height').value;
+      const wRaw = document.getElementById('weight').value;
+
+      if (!reNum.(hRaw) || !reNum.test(wRaw)) {
+        alert('마 장난 치지 말아');
+        return;
+      }
+      const h = parseFloat(hRaw);
+      const w = parseFloat(wRaw);
+
+      if (h <= 0 || h > 300 || w <= 0 || w > 500) {
+        alert('마 니 어디 사노');
+        return;
+      }
+
+      const heightM = h / 100;
+      const bmi = w / (heightM * heightM);
+
+      let grade = '저체중';
+      if (bmi >= 18.5) grade = '정상';
+      if (bmi >= 23)   grade = '과체중';
+      if (bmi >= 25)   grade = '비만';
+
+      document.getElementById('result').innerHTML =
+        `당신의 BMI는 ${bmi.toFixed(2)} 이며, 판정 결과는 ${grade} 입니다.`;
+    }
+  </script>
+
+</head>
+<body>
+  <h2>BMI 계산기</h2>
+
+  <div class="row">
+    <label for="height">신장(cm):</label>
+    <input id="height" type="text">
+  </div>
+  <div class="row">
+    <label for="weight">체중(kg):</label>
+    <input id="weight" type="text">
+  </div>
+  <div class="row">
+    <br>
+    <button type="button" onclick="calculateBMI()"><img src="./검사하기.png" alt="검사기다리는 닝갠" width="100px" height="100px"></button>
+  </div>
+
+  <div id="result"></div>
+
+  
+</body>
+</html>
