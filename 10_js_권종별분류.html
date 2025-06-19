@@ -20,10 +20,21 @@
         // document.write( parseInt(25600%10000) + "<br>" );
 
         function fn_result(){
+            const error = /^[0-9]+$/;
+
             let money = document.getElementById("money").value;
+
+            if(!error.test(money)){
+                alert("은행이 장난이냐");
+                return;
+            }
+           
+
+
             let won50000 = parseInt(money / 50000); 
             let remain = money % 50000;
             document.getElementById("result_50000").innerHTML = won50000;
+
 
             let won10000 = parseInt(remain / 10000);
             remain = remain % 10000;

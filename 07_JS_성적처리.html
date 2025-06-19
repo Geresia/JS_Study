@@ -7,15 +7,15 @@
 
     <script>
         function fn_result(){
-        const regular_jumsu = /^[0-9]{1,3}$/;
+        const regular_jumsu = /^[0-9]{1-4}$/;
             //입력된 성적을 읽어오기
             let kor = document.getElementById("kor").value;
-            let grade="F";
+            let grade="0";
             
             //유효성체크(정규식 + 일반논리)
 
-            if(regular_jumsu.test(kor)==false || kor<0 || kor>100){
-                alert("점수는 0~100사이만 입력하세요!");
+            if(regular_jumsu.test(kor)==false || kor<0 || kor>9999){
+                alert("마 또 니가");
                 return;
             }
 
@@ -24,15 +24,6 @@
             if(kor>=93 && kor <=95)grade = "A";
             if(kor>=90 && kor <=92)grade = "A-";
             if(kor>=86 && kor <=89)grade = "B+";
-            if(kor>=83 && kor <=85)grade = "B";
-            if(kor>=80 && kor <=82)grade = "B-";
-            if(kor>=76 && kor <=79)grade = "C+";
-            if(kor>=73 && kor <=75)grade = "C";
-            if(kor>=70 && kor <=72)grade = "C-";
-            if(kor>=66 && kor <=69)grade = "D+";
-            if(kor>=63 && kor <=65)grade = "D";
-            if(kor>=60 && kor <62)grade = "D-";
-
             // 등급계산...
 
             // 결과 출력.

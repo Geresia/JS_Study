@@ -4,45 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BMI 계산기</title>
-
-  <script>
-    function calculateBMI() {
-      const reNum = /^[0-9]{1,5}(\.[0-9]{1,2})?$/;
-      const h = isNaN(document.getElementById('height').value);
-      const w = isNaN(document.getElementById('weight').value);
-
-      // 입력 유효성 검사
-      if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
-        alert('신장과 체중에 올바른 숫자를 입력해주세요.');
-        return;
-      }
-
-
-      const heightM = h / 100;
-      const bmi = w / (heightM * heightM);
-
-      let grade;
-      if(bmi>=25) = "비만";
-      if(bmi>=23 && bmi <=25) = "과체중";
-      if(bmi>=18.5 && bmi <=23) = "정상";
-      if(bmi <=18.5) = "저체중";
-
-      // 결과 출력
-      document.getElementById('result').innerHTML =
-        `BMI는 <strong>${bmiRounded}</strong> 이며, 판정 결과는 <strong>${grade}</strong> 입니다.`;
-    }
-  </script>
-
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: 2rem auto; }
+    label { display: inline-block; width: 80px; }
+    input[type="text"] { width: 100px; }
+    .row { margin-bottom: 1rem; }
+    #result { margin-top: 1.5rem; font-weight: bold; }
+  </style>
 </head>
 <body>
   <h2>BMI 계산기</h2>
+
   <div class="row">
     <label for="height">신장(cm):</label>
-    <input id="height" type="text">
+    <input id="height" type="text" placeholder="예) 170">
   </div>
   <div class="row">
     <label for="weight">체중(kg):</label>
-    <input id="weight" type="text">
+    <input id="weight" type="text" placeholder="예) 65">
   </div>
   <div class="row">
     <button type="button" onclick="calculateBMI()">계산하기</button>
@@ -50,6 +29,51 @@
 
   <div id="result"></div>
 
-  
+  <script>
+    function calculateBMI() {
+      // 1~5자리 정수, 소수점 이하 최대 2자리 허용
+      const reNum = /^[0-9]{1,5}(\.[0-9]{1,2})?$/;
+
+      // 입력값 읽어오기
+      const hRaw = document.getElementById('height').value.trim();
+      const wRaw = document.getElementById('weight').value.trim();
+
+      // 정규식 검사
+      if (!reNum.test(hRaw) || !reNum.test(wRaw)) {
+        alert('신장과 체중은 1~5자리 숫자(소수점 이하 최대 2자리)만 입력해주세요.');
+        return;
+      }
+
+      // 숫자로 변환
+      const h = parseFloat(hRaw);
+      const w = parseFloat(wRaw);
+
+      if (h <= 0 || w <= 0) {
+        alert('0보다 큰 값을 입력해주세요.');
+        return;
+      }
+
+      // BMI 계산
+      const heightM = h / 100;
+      const bmi = w / (heightM * heightM);
+      const bmiRounded = parseFloat(bmi.toFixed(1));
+
+      // 등급 판정
+      let grade;
+      if (bmi >= 25) {
+        grade = '비만';
+      } else if (bmi >= 23) {
+        grade = '과체중';
+      } else if (bmi >= 18.5) {
+        grade = '정상';
+      } else {
+        grade = '저체중';
+      }
+
+      // 결과 표시
+      document.getElementById('result').innerHTML =
+        `당신의 BMI는 <strong>${bmiRounded}</strong> 이며, 판정 결과는 <strong>${grade}</strong> 입니다.`;
+    }
+  </script>
 </body>
 </html>
