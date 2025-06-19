@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        td{
+            text-align: right;
+        }
+    </style>
+
+    <script>
+
+        // document.write( parseInt(125600/50000) + "<br>");
+        // document.write( parseInt(125600%50000) + "<br>" );
+        // document.write( parseInt(25600/10000) + "<br>");
+        // document.write( parseInt(25600%10000) + "<br>" );
+
+        function fn_result(){
+            let money = document.getElementById("money").value;
+            let won50000 = parseInt(money / 50000); 
+            let remain = money % 50000;
+            document.getElementById("result_50000").innerHTML = won50000;
+
+            let won10000 = parseInt(remain / 10000);
+            remain = remain % 10000;
+            document.getElementById("result_10000").innerHTML = won10000;
+
+            let won5000 = parseInt(remain / 5000);
+            remain = remain % 5000;
+            document.getElementById("result_5000").innerHTML = won5000;
+
+            let won1000 = parseInt(remain / 1000);
+            remain = remain % 1000;
+            document.getElementById("result_1000").innerHTML = won1000;
+
+            let won500 = parseInt(remain / 500);
+            remain = remain % 500;
+            document.getElementById("result_500").innerHTML = won500;
+    
+            let won100 = parseInt(remain / 100);
+            remain = remain % 100;
+            document.getElementById("result_100").innerHTML = won100;
+
+            let won50 = parseInt(remain / 50);
+            remain = remain % 50;
+            document.getElementById("result_50").innerHTML = won50;
+
+            let won10 = parseInt(remain / 10);
+            remain = remain % 10;
+            document.getElementById("result_10").innerHTML = won10;
+
+
+            //2. 숫자체크 유횻성
+
+
+            //3. 권종별 갯수: 사용하는 연산자    /    %
+            let money_50000 = 0;
+            let money_10000 = 0;
+            let money_5000 = 0;
+            let money_1000 = 0;
+            let money_500 = 0;
+            let money_100 = 0;
+            let money_50 = 0;
+            let money_10 = 0;
+
+            //4. 결과출력
+            // document.getElemenById("result_50000").inner.HTML = money_50000;
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    <!-- 126580원 넣었다 치고
+     5만원 : 2매
+     1만원 : 2매
+     5천원 : 1매
+     1천원 : 1매
+     500원 : 1매
+      50원 : 1매
+      10원 : 1매 -->
+    금액 : <input id="money">
+           <input type="button" value="결과보기" onclick="fn_result();">
+    <hr>
+    <table border="1" width="300">
+        <tr>
+            <th width="30%">50000원권</th>
+            <td><span id="result_50000">0</span>(매)</td>
+        </tr>
+        <tr>
+            <th width="30%">10000원권</th>
+            <td><span id="result_10000">0</span>(매)</td>
+        </tr>
+        <tr>
+            <th width="30%">5000원권</th>
+            <td><span id="result_5000">0</span>(매)</td>
+        </tr>
+        <tr>
+            <th width="30%">1000원권</th>
+            <td><span id="result_1000">0</span>(매)</td>
+        </tr>
+        <tr>
+            <th width="30%">500원권</th>
+            <td><span id="result_500">0</span>(개)</td>
+        </tr>
+        <tr>
+            <th width="30%">100원권</th>
+            <td><span id="result_100">0</span>(개)</td>
+        </tr>
+        <tr>
+            <th width="30%">50원권</th>
+            <td><span id="result_50">0</span>(개)</td>
+        </tr>
+        <tr>
+            <th width="30%">10원권</th>
+            <td><span id="result_10">0</span>(개)</td>
+        </tr>
+    </table>
+</body>
+</html>
