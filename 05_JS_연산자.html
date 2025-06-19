@@ -149,11 +149,65 @@
 
     }
 
+    function 삼항연산자(){
+      //삼항연산자
+      // (조건) ? 값(참) : 값(거짓)
+
+      //2수중에 큰수구하기
+      let a = 10;
+      let b = 5;
+      let result;
+
+      result = (a > b) ? a : b;
+
+      document.write(`${a}, ${b}중에 큰수는 ${result} 입니다<br>`);
+
+      //절대값 구하기
+      let x = -100;
+      let y;
+      
+      y = (x<0) ? -x : x ;
+
+      document.write(` 3항연산자 : |${x}| = ${y}<br>`);
+        // x의 절대값 = | | 
+
+        //3항연산자 -> if else문과 동일
+        if(x<0)
+          y = -x; //조건에 참일떄 수행
+        else
+          y = x; //조건이 거짓일떄 수행
+      document.write(`if~else : |${x}| = ${y}<br>`);
+
+      //Short Circuit Evaluation(경제적연산)
+      let xx = 1;
+      let yy = 2;
+      let bResult;
+
+      bResult = --xx > 0 && ++yy > 0;
+
+      // xx = ? yy = ? bResult = ?
+
+      document.write(`xx=${xx}   yy=${yy}   bREsult=${bResult}<br>`) 
+      
+      bResult = ++xx > 0 || ++yy > 0;
+      document.write(`xx=${xx}   yy=${yy}   bREsult=${bResult}`)
+      // xx = yy = bResult = 
+
+      let x1, y1, z1;
+
+      x1 = y1 = z1 = 0;
+
+      x1 = 1 + 3 - 2 + 1;
+
+
+    }
+
     // 실행
-    산술연산자();
-    대입연산자();
-    단항연산자();
-    일반논리연산자();
+    // 산술연산자();
+    // 대입연산자();
+    // 단항연산자();
+    // 일반논리연산자();
+    삼항연산자();
   </script>
 </body>
 </html>

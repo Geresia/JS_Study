@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn_result(){
+        const regular_jumsu = /^[0-9]{1,5}$/;
+            let year = document.getElementById("year").value;
+            
+            if(!regular_jumsu.test(year)){
+                alert("마 또 니가?");
+                return;
+            }
+
+            if(year > 10000){
+                alert("마 너무 멀다")
+                return;
+            }
+
+            let number = '윤년이 아닙니다'
+            if(year%4==0 && year%100 != 0 || year%400==0){
+                number = '윤년입니다';
+            }
+
+            let result_msg = `년도 : ${year} 는 : ${number}`;
+            document.getElementById("result").innerHTML = result_msg;
+        }
+
+    </script>
+</head>
+<body>
+    년도:<input id="year">
+        <input type="button" value="결과보기" onclick="fn_result();">
+    <hr>
+    <div id="result"></div>
+</body>
+</html>
