@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn_result() {
+            let year = document.getElementById("year").value;
+
+            // 유호성 체크
+            // 숫자 4자리만 입력해라
+
+
+            //현재날짜구하기
+            let today = new Date(); //  년월일시분초요일 포함
+            let current_year = today.getFullYear(); //현재년도
+
+            //나이 구하기
+            let kor_age = current_year - year;
+            let age = current_year - year + 1;
+
+
+            // 10간
+            // 4  5 6  7  8  9  0 1 2  3    <=year%10(0~9)
+            // 갑 을 병 정 무 기 경 신 임 계
+            // 띠구하기
+            // 4  5  6 7  8  9 10 11 0  1  2  3  <= year%12 (0~11) 
+            // 자 축 인 묘 진 사 요 미 신 유 술 해
+            // 쥐 소 범 토 용 뱀 말 양 원 닭 개 돼지
+
+            let gan = "사"
+
+            switch (year % 10){
+                case 0: gan = "경"; break;
+                case 1: gan = "신"; break;
+                case 2: gan = "임"; break;
+                case 3: gan = "계"; break;
+                case 4: gan = "갑"; break;
+                case 5: gan = "을"; break;
+                case 6: gan = "병"; break;
+                case 7: gan = "정"; break;
+                case 8: gan = "무"; break;
+                case 9: gan = "기"; break;
+            }
+
+            let ji = "미";
+
+            let tti = "양";
+            switch (year % 12) {
+                case 0: tti = "원숭이"; ji = "신"; break;
+                case 1: tti = "닭"; ji = "유"; break;
+                case 2: tti = "개"; ji = "술"; break;
+                case 3: tti = "돼지"; ji = "해"; break;
+                case 4: tti = "쥐"; ji = "자"; break;
+                case 5: tti = "소"; ji = "축"; break;
+                case 6: tti = "범"; ji = "인"; break;
+                case 7: tti = "토끼"; ji = "묘"; break;
+                case 8: tti = "용"; ji = "진"; break;
+                case 9: tti = "뱀"; ji = "사"; break;
+                case 10: tti = "말"; ji = "오"; break;
+            }
+
+            //결과출력
+            let result = `${year}(${gan + ji})년생 <br> 나이는 ${age}살 <br> 만나이는 ${kor_age}살<br>띠는 ${tti}(띠)`;
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</head>
+
+<body>
+    출생년도:<input id="year">
+    <button onclick="fn_result();">결과보기</button>
+    <hr>
+    <div id="result"></div>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나이 구분기</title>
+  <script>
+    function fn_result() {
+      const ageInput = document.getElementById('age').value;
+      const age = parseInt(ageInput, 10);
+      let result = '';
+
+      if (age < 0) {
+        result = '유효한 나이를 입력해주세요';
+      } else if (age < 10) {
+        result = `꼬맹아 컴터꺼라`;
+      } else if (age < 12) {
+        result = `잼민아 컴터 꺼라`;
+      } else if (age < 16) {
+        result = `중딩아 컴터 꺼라`;
+      } else if (age < 18) {
+        result = `고딩아 수능 준비 해야지 컴터 꺼라`;
+      } else if (age < 21) {
+        result = `${age}살, 군대가야지?`;
+      } else if (age < 30) {
+        result = `${age}살, 우엑 복학생 화석이다`;
+      } else if (age < 36) {
+        result = `${age}살, 결혼해야지?`;
+      } else if (age < 45) {
+        result = `${age}살, 손주보고 싶구나`;
+      } else if (age < 65) {
+        result = `${age}살, 건강 챙겨야지`;
+      } else if (age < 150){
+        result = `${age}살, 어르신이시군요`;
+      } else{
+        result = `?님 구라 ㄴㄴ`;
+      }
+
+      document.getElementById('result').innerText = result;
+    }
+
+  </script>
+</head>
+<body>
+  
+  <label>나이: <input type="number" id="age" placeholder="숫자 입력"></label>
+  <button onclick="fn_result()">결과보기</button>
+  <hr>
+  <div id="result" style="font-weight:bold;"></div>
+  
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function fn_result() {
+            // const regular_jumsu = /^[0-9]{1-4}$/;
+            //입력된 성적을 읽어오기
+            let kor = document.getElementById("kor").value;
+            let grade = "F";
+
+            //유효성체크(정규식 + 일반논리)
+
+            // if (regular_jumsu.test(kor) == false || kor < 0 || kor > 9999) {
+            //     alert("마 또 니가");
+            //     return;
+            // 상수
+            const PI = 3.14;
+            //등급계산...
+            switch (parseInt(kor / 10)) {
+                // 상수리터럴
+                case 10:
+                case 9: grade = "A"; break;
+                case 8: grade = "B"; break;
+                case 7: grade = "C"; break;
+                case 6: grade = "D"; break;
+                default: grade = "F";
+            }
+
+            // 결과 출력.
+            let result_msg = `점수 : ${kor} 등급 : ${grade}`;
+            document.getElementById("result").innerHTML = result_msg;
+        }
+
+    </script>
+    <img src="" alt="">
+</head>
+
+<body>
+    국어:<input id="kor">
+    <input type="button" value="평정보기" onclick="fn_result();">
+    <hr>
+    <div id="result"></div>
+</body>
+
+</html>

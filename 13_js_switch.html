@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        let input = window.prompt("요일(0:일 1:월 2:화 3:수 4:목 5:금 6:토) 번호를 입력하세요");
+        let weekday = parseInt(input);   //  문자열 → 숫자 변환
+
+        let my_job = "";
+
+        if (!(weekday >= 0 && weekday <= 6)) {
+            alert("에휴 끄지라");
+        } else {
+
+            switch (weekday) {
+                case 0:
+                    my_job = "마음의 진정과 절망의 날";
+                    break;
+                case 1:
+                    my_job = "월요병 극복하는 날";
+                    break;
+                case 2:
+                    my_job = "이제 이틀 지났다는걸 인지하지 않는 날";
+                    break;
+                case 3:
+                    my_job = "아직 3일이나 남았다는 날";
+                    break;
+                case 4:
+                    my_job = "슬슬 희망이 보이는 날";
+                    break;
+                case 5:
+                    my_job = "화근한 날";
+                    break;
+                case 6:
+                    my_job = "중환자 체험의 날";
+                    break;
+                default:
+                    my_job = "기절하기";
+            }
+        }
+        document.write(`${weekday}요일에는 ${my_job}`);
+    </script>
+
+</head>
+
+<body>
+</body>
+
+</html>
