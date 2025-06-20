@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        td{
+            text-align: right;
+        }
+    </style>
+
+    <script>
+
+        // document.write( Math.floor(125600/50000) + "<br>");
+        // document.write( Math.floor(125600%50000) + "<br>" );
+        // document.write( Math.floor(25600/10000) + "<br>");
+        // document.write( Math.floor(25600%10000) + "<br>" );
+
+        function fn_result(){
+            // const error = /^[0-9]+$/;
+
+            let time = document.getElementById("time").value;
+
+            // if(!error.test(time)){
+            //     alert("시간이 장난이냐");
+            //     return;
+            // }
+
+            let year = Math.floor(time / 15768000);
+            let remain = time % 15768000;
+            document.getElementById("result_15768000").innerHTML = year;
+
+            let month = Math.floor(remain / 1314000);
+            remain = remain % 1314000;
+            document.getElementById("result_1314000").innerHTML = month;
+
+            let day = Math.floor(remain / 43200);
+            remain = remain % 43200;
+            document.getElementById("result_43200").innerHTML = day;
+    
+            let hour = Math.floor(remain / 3600);
+            remain = remain % 3600;
+            document.getElementById("result_3600").innerHTML = hour;
+
+            let minute = Math.floor(remain / 60);
+            remain = remain % 60;
+            document.getElementById("result_60").innerHTML = minute;
+
+            let second = Math.floor(remain / 1);
+            remain;
+            document.getElementById("result_1").innerHTML = second;
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+    초 : <input id="time">
+           <input type="button" value="결과보기" onclick="fn_result();">
+    <hr>
+    <table border="1" width="300">
+        <tr>
+            <th width="30%">몇년</th>
+            <td><span id="result_15768000">0</span>(년)</td>
+        </tr>
+        <tr>
+            <th width="30%">몇월</th>
+            <td><span id="result_1314000">0</span>(월)</td>
+        </tr>
+        <tr>
+            <th width="30%">몇일</th>
+            <td><span id="result_43200">0</span>(일)</td>
+        </tr>
+        <tr>
+            <th width="30%">몇시간</th>
+            <td><span id="result_3600">0</span>(시간)</td>
+        </tr>
+        <tr>
+            <th width="30%">몇분</th>
+            <td><span id="result_60">0</span>(분)</td>
+        </tr>
+        <tr>
+            <th width="30%">몇초</th>
+            <td><span id="result_1">0</span>(초)</td>
+        </tr>
+    </table>
+</body>
+</html>
