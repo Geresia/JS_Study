@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        *{ 
+            margin: 0; 
+            font-size: 0;
+        }
+
+        span{
+            display: inline-block;
+            width: 30px;
+            height: 32px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .colon{
+            width: 15px;
+        }
+
+    </style>
+
+    <script>
+        
+        //타이머 : 시간(1/1000초 단위)
+        //setTimeout(함수명,시간)  : 1회호출만 된다
+        setTimeout(timer_proc,0);
+
+        //setInterval(함수명,시간) : 시간간격마다 지속적으로 호출
+        setInterval(timer_proc,500);
+
+        let bColone = true;
+
+        function timer_proc(){
+           //console.log("--timer_proc call--");
+           const today = new Date();//현재시스템 날짜
+
+           let hour     = today.getHours();//시간(24시간제)
+           let minute   = today.getMinutes();
+           let second   = today.getSeconds();
+
+           
+
+           //콜론출력
+           bColone = !bColone; //Toggle처리: true<->false
+
+
+
+
+           let colones = document.getElementsByClassName("colon");
+           colones[0].style.color = bColone ? "white": "black";
+           colones[1].style.color = bColone ? "white": "black";
+
+           //시간출력
+           document.getElementById("Ampm").innerHTML    = (hour>12) ? 'PM' :   'AM';
+           document.getElementById("hour").innerHTML    = (hour>12) ? '0'+ (hour - 12) : '0' + hour;
+           document.getElementById("minute").innerHTML  = (minute<10) ? '0'+minute : minute;
+           document.getElementById("second").innerHTML  = (second<10) ? '0'+second : second;
+
+        }
+    </script>
+
+</head>
+<body>
+    <span id="Ampm"></span>
+    <span id="hour">15</span>
+    <span class="colon">:</span>
+    <span id="minute">35</span>
+    <span class="colon">:</span>
+    <span id="second">15</span>
+    
+
+
+
+</body>
+</html>
