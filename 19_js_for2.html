@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+            ASCII(America Standard Code for Information Interchange)
+            0~31 = 통신 및 제어문자
+            공백            (32)
+            숫자 0–9        (48–57)
+            영문 대문자 A–Z  (65–90)
+            영문 소문자 a–z  (97–122)
+        */
+        document.write("ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>")
+        for (let i = 65; i <= 90; i++) {
+            document.write(String.fromCharCode(i));
+        }
+        document.write("<br>");
+
+        document.write("AbCdEfGhIjKlMnOpQrStUvWxYz<br>")
+        for (let i = 65; i <= 90; i++) {
+            if (i % 2 == 1)
+                document.write(String.fromCharCode(i));
+            else
+                document.write(String.fromCharCode(i + 32));
+        }
+        document.write("<br>");
+        document.write("AbcDefGhiJklMnoPqqrStuVwxYz<br>")
+        for (let i = 65; i <= 90; i++) {
+            if (i % 3 == 2)
+                document.write(String.fromCharCode(i));
+            else
+                document.write(String.fromCharCode(i + 32));
+        }
+        document.write("<br>");
+        document.write("ABC-DEF-GHI-JKL-MNO-PQR-STU-VWX-YZ<br>")
+        for (let i = 65; i <= 90; i++) {
+            if (i % 3 == 1)
+                document.write(String.fromCharCode(i) + "-");
+            else
+                document.write(String.fromCharCode(i));
+        }
+        document.write("<br>");
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result{
+            width: 300px;
+            height: 300px;
+            background-color: black;
+            color: white;
+            padding: 15px;
+        }
+    </style>
+
+    <script>
+        const regular_gugudan = /^[2-9]{1}$/;
+        function fn_result(){
+            let dan = document.getElementById("dan").value;
+            if(regular_gugudan.test(dan)==false){
+                alert("2~9사이 숫자만 입력해라");
+                document.getElementById("dan").value="";
+                document.getElementById("dan").fcous;
+                return;
+            }
+
+            //구구단 출력에 대한 html  생성
+            let html = `<h4>[${dan}] 단 보기</h4>`;
+
+            for(let i=1; i<=9; i++){
+                html = html + `${dan} X ${i} = ${dan * i}<br>`
+            }
+             document.getElementById("result").innerHTML = html;
+            // html = html + `${dan} X 1 = ${dan * 1} <br>`;
+            // html = html + `${dan} X 2 = ${dan * 2} <br>`;
+            // html = html + `${dan} X 3 = ${dan * 3} <br>`;
+            // html = html + `${dan} X 4 = ${dan * 4} <br>`;
+            // html = html + `${dan} X 5 = ${dan * 5} <br>`;
+            // html = html + `${dan} X 6 = ${dan * 6} <br>`;
+            // html = html + `${dan} X 7 = ${dan * 7} <br>`;
+            // html = html + `${dan} X 8 = ${dan * 8} <br>`;
+            // html = html + `${dan} X 9 = ${dan * 9} <br>`;
+
+            //결과 출력
+            // document.getElementById("result").innerHTML = html;
+
+        }
+    </script>
+</head>
+<body>
+    단: <input id="dan">
+        <input type="button" value = "구구단보기" onclick="fn_result();" > 
+    <hr>
+    <div id="result">
+    </div>
+</body>
+</html>
