@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <script>
+    // 1~10까지 합
+    let sum = 0;
+    for (let i = 1; i <= 10; i++) {
+      document.write(i);
+      document.write(i < 10 ? "+" : "=");
+      sum += i;
+    }
+    document.write(sum + "<br>");
+
+    // 1~10까지 짝수의 합
+    sum = 0;
+    for (let i = 1; i <= 10; i++) {  // ← 여기서 1<=10이 아니라 i<=10이어야 합니다
+      if (i % 2 === 0)
+      sum += i;
+    }
+    document.write(`10까지 짝수의 합=${sum}<br>`);
+
+    // 1~10까지 짝수의 합
+    sum = 0;
+    for (let i = 0; i <= 10; i+=2 /*i+=2*/) {  // i = 0 2 4 6 8 10
+      sum = sum + i;
+    }
+    document.write(`10까지 짝수의 합=${sum}<br>`); // i = 10 8 6 4 2 0
+
+    sum = 0;
+    for(let i=10; i>=0; i -=2){
+        sum = sum + i;
+    }
+    document.write(`0~10까지 짝수의 합 =${sum}<br>`);
+  </script>
+</head>
+<body>
+</body>
+</html>
