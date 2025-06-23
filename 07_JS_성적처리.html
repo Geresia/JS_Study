@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <script>
-        function fn_result(){
-        const regular_jumsu = /^[0-9]{1-4}$/;
+        function fn_result() {
+            const regular_jumsu = /^[0-9]{1-4}$/;
             //입력된 성적을 읽어오기
             let kor = document.getElementById("kor").value;
-            let grade="0";
-            
+            let grade = "0";
+
             //유효성체크(정규식 + 일반논리)
 
-            if(regular_jumsu.test(kor)==false || kor<0 || kor>9999){
+            if (regular_jumsu.test(kor) == false || kor < 0 || kor > 9999) {
                 alert("마 또 니가");
                 return;
             }
 
             //등급계산...
-            if(kor>=96 && kor <=100)grade = "A+";
-            if(kor>=93 && kor <=95)grade = "A";
-            if(kor>=90 && kor <=92)grade = "A-";
-            if(kor>=86 && kor <=89)grade = "B+";
+            if (kor >= 96 && kor <= 100) grade = "A+";
+            else if (kor >= 93 && kor <= 95) grade = "A";
+            else if (kor >= 90 && kor <= 92) grade = "A-";
+            else if (kor >= 86 && kor <= 89) grade = "B+";
+            else if (kor >= 86 && kor <= 89) grade = "B";
+            else if (kor >= 86 && kor <= 89) grade = "B-";
+            else if (kor >= 86 && kor <= 89) grade = "C+";
+            else if (kor >= 86 && kor <= 89) grade = "C";
+            else if (kor >= 86 && kor <= 89) grade = "C-";
+            else if (kor >= 86 && kor <= 89) grade = "D+";
+            else if (kor >= 86 && kor <= 89) grade = "D";
+            else if (kor >= 86 && kor <= 89) grade = "D-";
             // 등급계산...
 
             // 결과 출력.
@@ -32,12 +41,14 @@
         }
 
     </script>
-<img src="" alt="">
+    <img src="" alt="">
 </head>
+
 <body>
     국어:<input id="kor">
-        <input type="button" value="평정보기" onclick="fn_result();">
+    <input type="button" value="평점보기" onclick="fn_result();">
     <hr>
-    <div id="result"></div> 
+    <div id="result"></div>
 </body>
+
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+            자료구조 : 데이터의 관리 방법
+            1. 선형구조
+                a.인접리스트 : 배열
+                b.링크드리스트 : 데이터간 연결이 주소로 연결됨
+
+
+            2. 비선형구조
+                a. 트리구조
+                b. 그래프
+
+        */
+
+        //              0        1       2        <-   index
+        const cars = ["Saab", "Volvo", "BMW"]; 
+        //배열갯수: length
+        document.write(`cars's length : ${cars.length}<br>`)
+
+        //배열요소표현: 배열명[첨자]
+        document.write(`cars[0] : ${cars[0]}<br>`)
+        document.write(`cars[1] : ${cars[1]}<br>`)
+        document.write(`cars[2] : ${cars[2]}<br>`)
+
+        //for문을 이용해서 출력(첨자)
+        document.write("---for문 이용<br>");
+        for(let i=0; i< cars.length; i++){
+            document.write(`cars[${i}] : ${cars[i]}<br>`)
+        }
+
+        //for 변수 in 배열
+        document.write("-- for ~ in 문 이용---<br>");
+        for(let i in cars){
+            document.write(`${i}<br>`)
+            document.write(`cars[${i}] : ${cars[i]}<br>`)
+        }
+
+        //for(변수 of 배열)
+        // const cars = ["Saab", "Volvo", "BMW"];
+        document.write("--- for ~ of 문 이용 ---<br>");
+        // 배열의 요소값을 넘겨준다(반복시 순서대로)
+        for(let brand of cars){
+            document.write(brand + "<br>");
+        }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
