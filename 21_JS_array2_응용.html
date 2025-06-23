@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        function fn_result() {
+            let month = document.getElementById("month").value;
+
+            //유효성 체크(1~12)
+
+            //  1  2  3  4  5  6  7  8  9 10 11 12    
+            // 31 28 31 30 31 30 31 31 30 31 30 31
+            let last_day = 31;
+            switch (parseInt(month)) {
+                case 2: last_day = 28; break;
+                case 4: 
+                case 6: 
+                case 9: 
+                case 11: last_day = 30; break;
+                default: last_day = 31; 
+            
+
+            //결과 출력
+            let result = `${month}월의 마지막 날은 ${last_day}입니다`;
+            document.getElementById("result").innerHTML = result;
+            }
+        }
+        function fn_result2(){
+            let month = document.getElementById("month").value;
+
+            //유효성 체크(1~12)
+
+            //  1  2  3  4  5  6  7  8  9 10 11 12 <- month
+            //  0  1  2  3  4  5  6  7  8  9 10 11 <- index = month - 1
+            // 31 28 31 30 31 30 31 31 30 31 30 31
+
+            const month_array = [31, 28, 31, 30, 31, 30, 31, 31 ,30 ,31 ,30 ,31];
+
+            let last_day = month_array[month-1];
+
+
+            //결과 출력
+            let result = `${month}월의 마지막 날은 ${last_day}입니다`;
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
 </head>
+
 <body>
-    
+    월:<input id="month">
+    <input type="button" value="결과보기1" onclick="fn_result();">
+    <input type="button" value="결과보기2" onclick="fn_result2();">
+    <hr>
+    <div id="result"></div>
 </body>
+
 </html>
