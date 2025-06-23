@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn_result() {
+            const year = parseInt(document.getElementById("year").value, 10);
+
+            // 12띠 배열
+            const tti_array = ["원숭이", "닭", "개", "돼지", "쥐", "소", "호랑이", "토끼", "용", "뱀", "말", "양"];
+            const tti_index = year % 12;
+
+            // 10간 배열
+            const gan_array = ["경", "신", "임", "계", "갑", "을", "병", "정", "무", "기"];
+            const gan_index = year % 10;
+
+            // 12지 배열
+            const ji_array = ["신", "유", "술", "해", "자", "축", "인", "묘", "진", "사", "오", "미"];
+            const ji_index = year % 12;
+
+            // 결과 문자열 생성
+            const resultText =
+                `${year}년생 ${tti_array[tti_index]}(띠) 입니다<br>` +
+                `그년도는 ${gan_array[gan_index]}${ji_array[ji_index]}년 입니다`;
+
+            // 결과 엘리먼트에 표시
+            const resultEl = document.getElementById("result");
+            resultEl.innerHTML = resultText;
+
+            // “갑” 또는 “을” 간지일 때만 파란색 적용
+            if (gan_array[gan_index] == "갑" || gan_array[gan_index] === "을") {
+                resultEl.style.color = "blue";
+            }else if (gan_array[gan_index] === "병" || gan_array[gan_index] === "정"){
+                resultEl.style.color = "red";
+            }else if (gan_array[gan_index] === "무" || gan_array[gan_index] === "기"){
+                resultEl.style.color = "yellow";
+            }else if (gan_array[gan_index] === "경" || gan_array[gan_index] === "신"){
+                resultEl.style.color = "gray";
+            }else if (gan_array[gan_index] === "임" || gan_array[gan_index] === "계"){
+                resultEl.style.color = "black"; 
+            }else{
+                resultEl.style.color = "purple"; 
+            }  
+        }
+    </script>
+</head>
+
+<body>
+    출생년도: <input id="year">
+    <input type="button" value="결과보기" onclick="fn_result();">
+    <hr>
+    <div id="result"></div>
+</body>
+
+</html>
