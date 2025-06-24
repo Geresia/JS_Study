@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fn_result(){
+
+            let year = document.getElementById("year").value;
+            //유효성 체크
+
+            //띠구하기
+
+            // 4  5  6 7  8  9 10 11 0  1 2 3  <- year%12(0~11)
+            // 자 축 인 묘 진 사 오 미 신 유 술 해
+            const tti_array = 
+            //  0     1    2    3     4    5    6      7     8    9   10   11
+            ["원숭이","닭","개","돼지","쥐","소","호랑이","토끼","용","뱀","말","양"];
+            let tti_index = year%12;
+
+            //10간
+            // 4 5  6  7  8  9 0  1  2  3   <- year%10(0~9)
+            // 갑 을 병 정 무 기 경 신 임 계 
+            //                  0    1    2   3    4    5   6    7   8    9  
+            const gan_array = ["경","신","임","계","갑","을","병","정","무","기"];
+            
+            //방법1)
+            //                         0      1     2     3     4  
+            const tti_color_array = ["흰색","검정","파랑","빨강","노랑"];
+            const color = tti_color_array[ parseInt((year%10)/2) ];
+
+            //방법2)
+            let color2="";
+            switch(parseInt(year%10))
+            {
+              case 0: 
+              case 1: color2="흰색"; break;
+              case 2: 
+              case 3: color2="검정"; break;
+              case 4: 
+              case 5: color2="파랑"; break;
+              case 6: 
+              case 7: color2="빨강"; break;
+              default: color2="노랑";
+            }
+
+
+            //12지
+            // 4  5  6 7  8  9 10 11 0  1 2 3  <- year%12(0~11)
+            // 자 축 인 묘 진 사 오 미 신 유 술 해
+            const ji_array = ["신","유","술","해","자","축","인","묘","진","사","오","미"];
+
+            let  ganji = gan_array[year%10] + ji_array[year%12] ;
+
+            let result = `${year}(${ganji})년생  
+                          (${ color }) ${ tti_array[tti_index] }(띠) 입니다`;
+
+            //결과 출력
+            document.getElementById("result").innerHTML = result;
+
+
+        }
+    </script>
+</head>
+<body>
+    출생년도:<input id="year">
+            <input type="button"  value="결과보기" onclick="fn_result();">
+    <hr>
+    <div id="result"></div>            
+</body>
+</html>
