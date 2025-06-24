@@ -1,0 +1,129 @@
+<!DOCTYPE html> <!-- 문서 타입 선언: HTML5 문서임을 브라우저에 알려줌 -->
+<html lang="en"> <!-- 페이지의 기본 언어를 영어로 설정 -->
+<head>
+  <meta charset="UTF-8"> <!-- 문자 인코딩을 UTF-8로 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 모바일에서 화면 너비를 디바이스 너비에 맞추고 확대 비율을 1로 고정 -->
+  <title>화장품 목록</title> <!-- 브라우저 탭에 표시될 문서 제목 -->
+
+  <!-- Bootstrap3.x CSS 불러오기 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- jQuery 라이브러리 불러오기 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Bootstrap3.x JavaScript 불러오기 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    /* 전체 박스 레이아웃 */
+    #box {
+      width: 1000px;       /* 너비를 1000px로 고정 */
+      margin: 20px auto;   /* 상하 여백 20px, 좌우 중앙 정렬 */
+    }
+    /* 제목 스타일 */
+    #title {
+      text-align: center;                    /* 가운데 정렬 */
+      font-size: 28px;                       /* 글자 크기 28px */
+      color: darkcyan;                       /* 글자 색을 다크 시안으로 */
+      text-shadow: 1px 1px 1px black;        /* 글자 그림자 추가 */
+      margin-bottom: 20px;                   /* 아래 여백 20px */
+    }
+    /* 테이블 내 이미지는 최대 높이 80px */
+    td img {
+      max-height: 80px;
+    }
+    /* 별점 표시용 기본 스타일 */
+    .star-rating {
+      --rating: 0%;               /* 커스텀 프로퍼티: 별 색칠 비율 */
+      font-size: 1.2em;           /* 별 크기를 1.2em으로 */
+      position: relative;         /* ::after 절대 위치 기준 */
+      display: inline-block;      /* 인라인 블록으로 */
+      color: #ccc;                /* 기본 별(빈별) 색 */
+    }
+    /* 회색 별 5개를 배경처럼 표시 */
+    .star-rating::before {
+      content: "★★★★★";          /* 5개의 별 문자를 넣음 */
+    }
+    /* 금색 별 5개를 겹쳐서, 너비를 잘라 보이게 함 */
+    .star-rating::after {
+      content: "★★★★★";          /* 동일한 5개의 별 */
+      position: absolute;         /* 부모(.star-rating) 내부 좌표 기준으로 위치 */
+      left: 0; top: 0;            /* 좌상단에 붙여서 겹침 */
+      width: var(--ting);       /* CSS 변수(--rating) 만큼만 너비를 보여줌 */
+      overflow: hidden;           /*잘린 부분 숨김*/
+      color: gold;                /* 금색 별 */
+    }
+  </style>
+
+  <script>
+    // 서버에서 받아올 제품 목록을 저장할 배열
+    let product_array = [];
+
+    // 페이지 로드 완료 시 한 번 실행
+    window.onload = function () {
+      // fetch API로 maybelline 브랜드 제품 목록 JSON 요청
+      fetch('https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+        .then(resp => resp.json())      // 응답을 JSON 파싱
+        .then(json => product_array = json) // 파싱된 결과를 product_array에 저장
+        .catch(err => console.error(err));   // 에러 발생 시 콘솔에 출력
+    };
+
+    // “목록보기” 버튼 클릭 시 호출되는 함수
+    function fn_result() {
+      // 테이블 헤더 HTML 생성
+      let html = `
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr class="success">
+              <th width="20%">상품이미지</th>
+              <th width="20%">상품명</th>
+              <th width="15%">가격</th>
+              <th>설명</th>
+              <th width="15%">별점</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      // product_array 배열을 순회하며 각 제품에 대해 행(row)을 생성
+      product_array.forEach(p => {
+        // rating 값이 null 이거나 범위를 벗어나면 0~5 사이로 보정
+        const r = Math.max(0, Math.min(5, Number(p.rating) || 0));
+        // 5점 만점 기준 금색 별이 채워질 비율 계산(백분율)
+        const pct = (r / 5 * 100).toFixed(2) + '%';
+
+        // 각 제품의 행 HTML 조각
+        html += `
+          <tr>
+            <td><img src="${p.image_link}" alt="상품 이미지"></td>
+            <td>${p.name}</td>
+            <td>${p.price ? p.price + ' $' : '–'}</td>
+            <td>${p.description.replace(/\n/g, '<br>')}</td> 
+            <td>
+              <!-- CSS 변수(--rating)를 인라인 스타일로 넘겨줘 반별까지 표현 -->
+              <div class="star-rating" style="--ting: ${pct};"></div>
+            </td>
+          </tr>
+        `;
+      });
+
+      // 테이블 닫기 태그 추가
+      html += `
+          </tbody>
+        </table>
+      `;
+
+      // 만들어진 HTML을 result 요소에 삽입
+      document.getElementById("result").innerHTML = html;
+    }
+  </script>
+</head>
+
+<body>
+  <div id="box">
+    <h1 id="title">:::: 화장품 목록 ::::</h1>
+    <!-- 클릭 시 fn_result() 실행 -->
+    <button class="btn btn-primary" onclick="fn_result()">목록보기</button>
+    <!-- 테이블이 들어갈 영역 -->
+    <div id="result" style="margin-top:20px;"></div>
+  </div>
+</body>
+</html>
