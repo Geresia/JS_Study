@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 연관배열(JSON)
+        const person = {"name": "이길동", "age": 20, 
+        "addre":"서울시 관악구"};
+
+        let name = person['name']; //배열의요소표현하는 형식
+
+        for(let key in person){
+            // console.log(person[key]);
+            document.write(`key : ${key} value : ${person[key]}<br>`)
+        }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

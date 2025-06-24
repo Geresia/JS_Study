@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+            JSON(Javascript Object Notation)
+            :자바스크립트에서 객체를 표현하는 표기법
+            형식)
+                { name:value , name: value }
+                { key :value , key : value }
+        */
+
+        // const person = { "name": "일길동", "age": 30, 
+        //                   "tel": "010-123-3456" }; //json파일
+        // //  Dot표기법
+        // let name = person.name;
+        // // Squre Bracket : []
+        // let age = person["age"]; 
+        // let tel = person["tel"]; 
+        // document.write(`이름이 뭐에요? ${name}<br>`)
+        // document.write(`이름:${name} 나이:${age} 전화:${tel}<br>`)
+
+        const person2 = {
+                        "name": {"FullName":"홍박사",
+                                "familyName":"홍",
+                                "givenName":"박사"},
+                        
+                        "age" : 30,
+                        "hobby" :["자기","놀기","숨쉬기"],
+                        "tel" : {
+                                    "cellPhone":"010-111-1234",
+                                    "homePhone": "02-123-1234"
+                                },
+                        "married" :false
+
+                        };
+
+            let hobby_list="[취미]<br>";
+            // 방법 1
+            // for(let i=0; i < person2.hobby.length; i++){
+            //     hobby_list += `취미${i+1} : ${person2.hobby[i]}<br>`;
+            // }
+            // 방법2 : 해당배열의 첨자를 반환
+            // for(let i in person2.hobby){
+            //     hobby_list += `취미${parseInt(i) + 1} : ${person2.hobby[i]}<br>`;
+            // }
+            
+
+            //  방법3 : for ~ of 해당배열의 요소를 반환
+            // "hobby" : ["낚시""독서""영화보기"]
+            let i = 1;
+            for(let h of person2.hobby){
+                hobby_list += `취미'${i} : ${h}<br>`;
+                i++;
+            }
+        
+            let result = `
+                        전체이름: ${ person2.name.FullName}<br>
+                        성: ${person2.name.familyName}<br>
+                        이름: ${person2["name"]["givenName"]}<br>
+                        나이: ${person2.age}(살)<br>
+                        ${hobby_list}
+                        전화번호: ${person2.tel.cellPhone}<br>
+                        집전화번호: ${person2.tel.homePhone}<br>
+                        결혼 유무: ${person2.married ? '감금생활' : '나는 빛이 나는 솔로'}<br>
+                       
+            `;
+            document.write(`${result}`)
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

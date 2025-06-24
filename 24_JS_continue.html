@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //continue:반복문에서만 사용
+        //         현재 수행 명령 종료하고 다음 제어식으로 이동해라
+        let sum = 0;
+        for(let i=0;i<=10;i++){
+            if(i%2==0) continue; //continue 짝수일시 즉시 중지하고 다음식으로 넘어가라
+            sum += i; // sum = sum + i
+        }
+
+        document.write(`홀수의 값=${sum}<br>`);
+
+    </script>
+</body>
+</html>
