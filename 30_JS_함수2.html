@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 외부작성된 js library  -->
+     <script src ="./js/myfunction.js"></script>
+
+    <script>
+        /*
+            (전달)인자(변수)가 있는 함수
+            function 함수명(인자1, 인자2,...){
+
+            }
+            
+        */
+
+        //              a, b < - 가(변)인자
+        //              생성 : 호출시 생성
+        //              소멸 : 종료시 소멸
+        function plus(a,b){
+            
+            let c = a + b;
+            //return (값): 자신을 호출한 곳으로 (값을 갖고) 돌아가라
+            return c ;
+            
+        }
+
+
+        //함수호출
+        //   실인자
+        let x = 10, y = 20;
+        let result = plus(x, y) // <- + plus아니다 그냥 이름 plus
+
+        document.write(`${x} + ${y} = ${result}<br>`)
+
+        result = minus(x,y);
+        document.write(`${x} - ${y} = ${result}<br>`)
+
+        
+        //x까지의 합
+        result = hap (x);
+        document.write(`${x}의 합은 = ${result} 입네다 동무`)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
