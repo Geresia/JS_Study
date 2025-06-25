@@ -31,7 +31,7 @@
 
         //함수호출
         //   실인자
-        let x = 10, y = 20;
+        let x = 10, y = 20, z = 3;
         let result = plus(x, y) // <- + plus아니다 그냥 이름 plus
 
         document.write(`${x} + ${y} = ${result}<br>`)
@@ -42,7 +42,29 @@
         
         //x까지의 합
         result = hap (x);
-        document.write(`${x}의 합은 = ${result} 입네다 동무`)
+        document.write(`${x}의 합은 = ${result} 입네다 동무<br>`);
+        //x까지의 합
+        result = hap (y);
+        document.write(`${y}의 합은 = ${result} 입네다 동무<br>`);
+
+        result = hap_even(x);
+        document.write(`${x}의 짝수의 합은 = ${result} 입니다<br>`);
+
+        result = hap_odd(x);
+        document.write(`${x}의 홀수의 합은 = ${result} 입니다<br>`);
+
+        result = hap_baesu(x, z);
+        document.write(`${x}의 ${z}의배수의합은 = ${result} 입니다<br>`);
+
+        //x 까지의 짝수목
+        let even_data = even_list(x);
+        document.write(even_data);
+        document.write(`<br>`)
+
+        //x 까지의 솟수목록
+        x = 30;
+        let prime_data = prime_list(x);
+        document.write(prime_data + "<br>");
     </script>
 </head>
 <body>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 외부작성된 js library -->
+    <script src="./js/myfunction_선생님.js"></script>
+ 
+    <script>
+        /*
+          (전달)인자(변수)가 있는 함수
+          function 함수명(인자1,인자2,...){
+          
+          }
+        */
+
+        //            a,b <- 가(변)인자(지역변수:local variable)
+        //            생성:호출시
+        //            소멸:종료시       
+        function plus(a,b){
+           
+            let c = a + b;
+            //return (값): 자신을 호출한 곳으로 (값을 갖고) 돌아가라
+            return c ;
+        }
+
+
+        //함수호출
+        //   실인자
+        let x= 10, y=20;
+        let result = plus(x,y);
+
+        document.write(`${ x } + ${ y } = ${ result}<br>`);
+        
+        result = minus(x,y);
+        document.write(`${ x } - ${ y } = ${ result}<br>`);
+
+        //x까지의 합
+        result = hap(x);
+        document.write(`${ x }까지의 합 = ${ result}<br>`);
+        
+        //y까지의 합
+        result = hap(y);
+        document.write(`${ y }까지의 합 = ${ result}<br>`);
+
+        //x 까지의 짝수의 합
+        result = hap_even(x);
+
+        //x 까지의 짝수목록
+        let even_data = even_list(x);
+        document.write(even_data +"<br>");
+
+        //x 까지의 솟수목록
+        x = 30;
+        let prime_data = prime_list(x);
+        document.write(prime_data + "<br>");
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
