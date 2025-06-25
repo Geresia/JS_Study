@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap3.x ver -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <style>
+       #box{
+          width: 1000px;
+          margin: auto;
+          margin-top: 20px;
+       }
+
+       #title{
+          text-align: center;
+          font-size: 28px;
+          color: darkcyan;
+          text-shadow: 1px 1px 1px black;
+       }
+
+    </style>
+
+    <script>
+
+       //네트워크로부터 읽어온 목록을 저정할 변수
+       let product_array = [];
+
+       //초기화 이벤트:html내의 모든 컨트롤이 생성 배치완료되면
+       window.onload = function(){
+
+            //Data Load
+            fetch('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+                .then((response) => response.json())
+                .then((json) => product_array=json );
+            
+
+       };
+
+       // product_array = [ {''},{},{}];
+
+       function fn_result(){
+
+          let html = `
+                  <table class="table table-hover table-striped">
+                    <tr class="success">
+                        <th>상품이미지</th>
+                        <th width="20%">상품명</th>
+                        <th width="10%">가격</th>
+                        <th width="40%">상품설명</th>
+                        <th width="10%">별점</th>
+                    </tr>
+                `;
+          //for -> 상품목록 채우기
+          for(let i=0;i<product_array.length;i++){
+             const product = product_array[i];
+
+
+             let star_list="";
+             for(let i=0;i<parseInt(product.rating);i++){
+                star_list += "★";
+             }
+
+             if(product.rating - parseInt(product.rating)>0){
+                star_list += "☆";
+             }
+
+             
+             let left = 100 - (5.0-product.rating) * 2 * 10;
+             html = html + `
+                 <tr>
+                    <td><img src="${ product.image_link }" width="120"></td> 
+                    <td>${ product.name }</td>
+                    <td>${ product.price }</td>
+                    <td>${ product.description }</td>
+                    <td>
+                         ${ star_list }<br>
+                         ${ product.rating==null ? 0 : product.rating  }
+                        // 별그리기
+                        <div style="position:relative;" 
+                           width= 100px; height = 30px;>
+                           <div>★★★★★</div>
+                        </div>
+                        <div style="position:absolute;" 
+                           width= 100px; height = 30px;
+                           background:red; left:100px>
+                           </div>
+                         
+                    </td>
+                 </tr>   
+             `;
+          }
+          
+          
+          html += "</table>";
+
+          //결과출력
+          document.getElementById("result").innerHTML = html;
+           
+
+       }
+
+       
+    </script>
+
+</head>
+<body>
+
+     &#11242;
+
+
+
+    <div id="box">
+        <h1 id="title">::::화장품 목록::::</h1>
+        <button onclick="fn_result();">목록보기</button>
+        <div id="result"></div>
+
+    </div>
+</body>
+</html>
