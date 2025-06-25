@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        /*
+            함수(Function): 특정기능를 수행하는 코드의 집합
+            형식1)선언적방식
+                function 함수명() { 코드작성 }
+            형식2)리터럴방식
+                            (익명함수)
+                const 함수명 = function(){ }
+
+                cf)리터럴(변하지 값)
+                        (상수)      (숫자리터럴)
+                    const PI = 3.141592;
+                          (상수)            (문자리터럴)
+                    const MY_PROJECT = "푸드딜리셔스";
+            형식3)Arrow Function(람다식)
+        */
+
+        //1.선언적방식
+        function 떡볶이만들기(){
+            let result = `
+                <h4>떡볶이 만들기</h4>
+                1.물을 끓인다<br>
+                2.고추장을 푼다<br>
+                3.설탕<br>
+                4.케찹<br>
+                5.소고기 다시다 넣는다<br>
+                6.떢을 넣는다<br>
+                7.5분정도 끓인다<br>
+            `;
+            document.getElementById("result").innerHTML = result;
+        }
+
+        //2.리터럴방식
+        // const 라면끓이기 = function(){
+
+        //     let result = `
+        //             <h4>라면 맛있게 끓이기</h4>
+        //             1.컵라면을 관물대에서 꺼낸다<br>
+        //             2.시계 타이머를 설정을한다<br>
+        //             3.3초준다 끓여와<br>
+        //             4.2<br>
+        //     `;
+            
+        //     document.getElementById("result").innerHTML = result
+        // };
+
+        // Arrow Function(화살표 함수) : Lamda표현식(함축식)
+        const 볶음밥만들기 = () => {
+            let result = `
+                    <h4>볶음밥 만들기</h4>
+                    1.파기름을 넣는다<br>
+                    2.야채 넣는다<br>
+                    3.밥을 넣는다<br>
+                    4.섞는다 <br>
+                    5.골구루 섞는다<br>
+                    6.참기름을 넣는다<br>
+            `;
+            
+            document.getElementById("result").innerHTML = result
+        };
+    </script>
+
+
+</head>
+<body>
+    <button onclick ="떡볶이만들기()">떡볶이 만드는 방법</button>
+    <button onclick ="라면끓이기()">라면 끓이는 방법</button>
+    <button onclick ="볶음밥만들기()">볶음밥 만들기 방법</button>
+
+    <div id="result"></div>
+</body>
+</html>
