@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 외부 라이브러리 연결 -->
+    <script src="mymath_선생님.js"></script> 
+
+    <script>
+        // 기존에 제공되는 함수(Math:수학적기능)
+        document.write("---[기 제공해주는 수학적함수]---<br>")
+ 
+        let a=10, b=5 , c=100;
+        let result = Math.max(a,b);
+        document.write(`${a},${b}중에 큰수는 ${result}<br>`);
+        
+        result = Math.max(a,b,c);
+        document.write(`${a},${b},${c}중에 큰수는 ${result}<br>`);
+
+        result = Math.min(a,b);
+        document.write(`${a},${b}중에 작은수는 ${result}<br>`);
+
+        let n = -100;
+        result = Math.abs(n);
+        document.write(`|${n}| = ${result}<br>`);
+
+        let x = 2, y =3;
+        result = Math.pow(x,y);
+        document.write(`${x}'s ${y}승 = ${result}<br>`);
+
+
+        document.write("--[내가 만든 라이브러리]--<br>");
+        result = MyMath.max(a,b);
+        document.write(`${a},${b}중에 큰수는 ${result}<br>`);
+
+        result = MyMath.max3(a,b,c);
+        document.write(`${a},${b},${c}중에 큰수는 ${result}<br>`);
+
+        result = MyMath.max33(a,b,c);
+        document.write(`${a},${b},${c}중에 큰수는 ${result}<br>`);
+
+        // result = (a>10) ? '10보다큼' : a>=0 ? '양수임':'음수임';
+        // document.write(result);
+        
+        //let n = -100;
+        result = MyMath.abs(n);
+        document.write(`|${n}| = ${result}<br>`);
+
+
+        result = MyMath.pow(x,y);
+        document.write(`${x}'s ${y}승 = ${result}<br>`);
+
+        n = 4;
+        result = MyMath.factorial(n);
+        document.write(`${n}! = ${result}<br>`);
+
+    </script>
+</head> 
+<body>
+    
+
+</body>
+</html>

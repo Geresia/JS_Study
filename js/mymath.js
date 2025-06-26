@@ -33,7 +33,8 @@ class M_1{
     // 4! = 4 * 3 * 2 * 1
     // 0! = 1
     static factorial(n){
-        for (let i = n; i <= 90; i++){
+        for (let i = 0; i <= n; i++){
+            
 
         }
     }
