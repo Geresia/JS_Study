@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // Slice Substring Substr : 문자열 추출 
+                    // 9876543210987654321 <- -index
+                    // 0123456789012345678 <- index
+        let text = "Apple, Banana, Kiwi";
+        // 추출범위: 7 <= 추출문자열 < 13
+        let part = text.slice(7,13);
+        document.write(`slice(7,13): 7<= part < 13 : ${part}<br>`);
+        let part_Sub = text.substring(7,13);
+        document.write(`substring(7,13): 7<= part < 13 : ${part_Sub}<br>`);
+
+        part = text.substr(7,6);
+        document.write(`substr(7,13): 7번부터 6개 ${part}<br>`);
+
+        part = text.slice(7);
+        document.write(`slice(7): 7번부터 끝까지 : ${part}<br>`);
+
+
+        let text1 = "   Hello Wrorld!           ";
+        let text2 = text1.trim();
+        let text3 = text1.trimStart(); //앞쪽공백제거
+        let text4 = text1.trimEnd();  //뒷쪽공백제거
+        document.write(`<pre>[${text1}] => [${text2}]</pre>`);
+        document.write(`<pre>[${text1}] => [${text3}]</pre>`);
+        document.write(`<pre>[${text1}] => [${text4}]</pre>`);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
