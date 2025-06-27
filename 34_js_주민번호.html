@@ -37,6 +37,13 @@
         //    객체명 =       객체(object)
         const jumin = new Jumin(jumin_no);
 
+
+        if(jumin.isValid()==false){
+             alert("간...간첩이다!");
+             return;
+         }
+
+        
         let year    = jumin.getYear();
         let age     = jumin.getAge();
         let tti     = jumin.getTti();
@@ -44,22 +51,28 @@
         let season  = jumin.getSeason();
         let ganji  = jumin.getGanji();
         let location = jumin.getLocal();
+        // let generation = jumin.getgen();
 
 
 
 
         //결과 출력
+
+        
         document.getElementById("year").innerHTML = year + ("년  ") + ganji;
         document.getElementById("age").innerHTML = age + "(살)";
         document.getElementById("tti").innerHTML = tti;
         document.getElementById("gender").innerHTML = gender;
         document.getElementById("local").innerHTML = location;
         document.getElementById("season").innerHTML = season;
-
+        //  
 
         //유호성 체크
         //jumin_no = "901312-1234567" 13월이 없음
         }
+
+        // alert(Number.isInteger('123'));
+
     </script>
 
 

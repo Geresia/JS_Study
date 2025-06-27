@@ -152,4 +152,82 @@ class Jumin {
         const ganji = gan[(ganIndex + 10) % 10] + ji[(jiIndex + 12) % 12] + "년";
         return ganji;
     }
+    //                  01234567890123 < - index
+    // this.jumin_no = "991212-1234567"
+    // 234567 892345
+    // isXXXX : 맞냐?
+    isValid2() {
+        let sum = 0;
+
+        sum = sum + parseInt(this.jumin_no.charAt(0)) * 2;
+        sum = sum + parseInt(this.jumin_no.charAt(1)) * 3;
+        sum = sum + parseInt(this.jumin_no.charAt(2)) * 4;
+        sum = sum + parseInt(this.jumin_no.charAt(3)) * 5;
+        sum = sum + parseInt(this.jumin_no.charAt(4)) * 6;
+        sum = sum + parseInt(this.jumin_no.charAt(5)) * 7;
+
+        sum = sum + parseInt(this.jumin_no.charAt(7)) * 8;
+        sum = sum + parseInt(this.jumin_no.charAt(8)) * 9;
+        sum = sum + parseInt(this.jumin_no.charAt(9)) * 2;
+        sum = sum + parseInt(this.jumin_no.charAt(10)) * 3;
+        sum = sum + parseInt(this.jumin_no.charAt(11)) * 4;
+        sum = sum + parseInt(this.jumin_no.charAt(12)) * 5;
+
+        // checksum 1
+        // sum = sum%11;
+        // sum = 11-sum;
+        // let checksum = sum%10;
+
+
+        //checksum 2
+        let checksum = (11 - (sum % 11) % 10);
+
+        console.log("checksum", checksum);
+
+        //주민번호의 마지막값
+        let last_no = parseInt(this.jumin_no.charAt(12))
+
+        return checksum == last_no;
+    }//end:isValid()
+    isValid() {
+        // 1) 앞 12자리 숫자에 대한 가중치 곱셈 합 구하기
+        const numbers = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5];
+        let sum = 0;
+        let idx = 0;
+        for (let i = 0; i <= 12; i++) {
+            if (i === 6) continue;                  
+            sum += parseInt(this.jumin_no.charAt(i)) * numbers[idx++];
+            if (idx === 12) break;                   
+        }
+
+        
+        const checksum = (11 - (sum % 11)) % 10;
+
+        const lastNo = parseInt(this.jumin_no.charAt(13));
+
+        return checksum === lastNo;
+    }
+    //                  01234567890123 < - index
+    // this.jumin_no = "991212-1234567"
+    //                  2345670892345   
+    // isValid3(){
+    //     const numbers = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5];
+    //     let sum = 0;
+        
+    //     let su_array = [2345670892,3,4,5]
+    //     for (let i = 0; i < this.jumin_no.length; i++) {
+    //         if (i === 6) continue;                  
+    //         sum += parseInt(this.jumin_no.charAt(i)) * numbers[idx++];
+    //         if (idx === 12) break;                   
+    //     }
+
+        
+    //     const checksum = (11 - (sum % 11)) % 10;
+
+    //     const lastNo = parseInt(this.jumin_no.charAt(13));
+
+    //     return checksum === lastNo;
+    // }
+
+
 }
