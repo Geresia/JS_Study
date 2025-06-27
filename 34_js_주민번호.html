@@ -42,15 +42,18 @@
         let tti     = jumin.getTti();
         let gender  = jumin.getGender(); 
         let season  = jumin.getSeason();
+        let ganji  = jumin.getGanji();
+        let location = jumin.getLocal();
+
 
 
 
         //결과 출력
-        document.getElementById("year").innerHTML = year + "(기묘년)";
+        document.getElementById("year").innerHTML = year + ("년  ") + ganji;
         document.getElementById("age").innerHTML = age + "(살)";
         document.getElementById("tti").innerHTML = tti;
         document.getElementById("gender").innerHTML = gender;
-        document.getElementById("local").innerHTML = "서울";
+        document.getElementById("local").innerHTML = location;
         document.getElementById("season").innerHTML = season;
 
 

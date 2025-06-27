@@ -97,15 +97,40 @@ class Jumin {
     }
 
     getLocal() {
-        return "제주";
-    }
+        // ① 뒷자리 2~3번째 자리: 등록지 코드(00~95)
+        const code = parseInt(this.jumin_no.substring(8, 10));
 
+        // ② 코드별 행정구역 매핑
+        if (code >= 0 && code <= 8) return "서울특별시";
+        if (code >= 9 && code <= 12) return "부산광역시";
+        if (code >= 13 && code <= 15) return "인천광역시";
+        if (code >= 16 && code <= 25) return "경기도";
+        if (code >= 26 && code <= 34) return "강원특별자치도";
+        if (code >= 35 && code <= 39) return "충청북도";
+        if (code >= 40 && code <= 41) return "대전광역시";
+        if (code >= 42 && code <= 47) return "충청남도";
+        if (code === 44 || code === 96) return "세종특별자치시";
+        if (code >= 48 && code <= 54) return "전라북도";
+        if (code >= 55 && code <= 66) {
+            if ((code >= 55 && code <= 56) || (code >= 65 && code <= 66)) {
+                return "광주광역시";
+            }
+            return "전라남도";
+        }
+        if ((code >= 67 && code <= 69) || code === 76) return "대구광역시";
+        if ((code >= 70 && code <= 75) || (code >= 77 && code <= 81)) return "경상북도";
+        if ((code >= 82 && code <= 84) || (code >= 86 && code <= 89) || (code >= 90 && code <= 92)) return "경상남도";
+        if (code === 85 || code === 90) return "울산광역시";
+        if (code >= 93 && code <= 95) return "제주특별자치도";
+
+        return "간첩이다!";
+    }
     getSeason() {
-        
+
         const month = parseInt(this.jumin_no.substring(2, 4));
         let seasonName;
 
-        
+
         if (month >= 3 && month <= 5) {
             seasonName = "봄";
         } else if (month >= 6 && month <= 8) {
@@ -117,5 +142,14 @@ class Jumin {
         }
 
         return seasonName;
+    }
+    getGanji() {
+        const gan = ["갑", "을", "병", "정", "무", "기", "경", "신", "임", "계"];
+        const ji = ["자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"];
+        const y = this.getYear();
+        const ganIndex = (y - 4) % 10;
+        const jiIndex = (y - 4) % 12;
+        const ganji = gan[(ganIndex + 10) % 10] + ji[(jiIndex + 12) % 12] + "년";
+        return ganji;
     }
 }
