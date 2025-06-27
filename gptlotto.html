@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D 로또 추첨</title>
+  <style>
+    .lotto-container {
+      perspective: 600px;
+      text-align: center;
+      margin: 50px;
+    }
+    .win_no {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 35px;
+      font-weight: bold;
+      color: white;
+      border-radius: 50%;
+      margin: 0 5px;
+      /* 기본 입체 스타일 */
+      background: radial-gradient(circle at 30% 30%,
+        rgba(255,255,255,0.3) 0%,
+        rgba(0,0,0,0.3) 80%,
+        rgba(0,0,0,0.7) 100%);
+      box-shadow:
+        inset -4px -4px 8px rgba(255,255,255,0.5),
+        inset  4px  4px 8px rgba(0,0,0,0.5),
+               2px  2px 6px rgba(0,0,0,0.4);
+      transform: rotateX(20deg) rotateY(-15deg) scale(0);
+      transform-style: preserve-3d;
+      opacity: 0;
+      transition: transform 0.5s, opacity 0.5s;
+    }
+    .win_no.drawn {
+      transform: rotateX(20deg) rotateY(-15deg) scale(1);
+      opacity: 1;
+    }
+    .win_no.bonus {
+      background: radial-gradient(circle at 30% 30%,
+        rgba(255,255,255,0.3) 0%,
+        coral 80%,
+        darkorange 100%);
+    }
+    #drawBtn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="lotto-container">
+    <span class="win_no"></span>
+    <span class="win_no"></span>
+    <span class="win_no"></span>
+    <span class="win_no"></span>
+    <span class="win_no"></span>
+    <span class="win_no"></span>
+    <span class="win_no bonus"></span>
+  </div>
+  <button id="drawBtn">로또추첨하기</button>
+
+  <script>
+    function generateLotto() {
+      const candidates = Array.from({length:45}, (_,i)=>i+1);
+      const shuffled = [];
+      while (candidates.length) {
+        const idx = Math.floor(Math.random() * candidates.length);
+        shuffled.push(candidates.splice(idx,1)[0]);
+      }
+      const numbers = shuffled.slice(0,6).sort((a,b)=>a-b);
+      const bonus = shuffled[6];
+      return { numbers, bonus };
+    }
+
+    document.getElementById('drawBtn').addEventListener('click', () => {
+      const { numbers, bonus } = generateLotto();
+      const slots = document.querySelectorAll('.lotto-container .win_no');
+      // 초기화
+      slots.forEach(s => {
+        s.textContent = '';
+        s.classList.remove('drawn');
+      });
+      // 순서대로 하나씩 보여주기
+      numbers.forEach((num, i) => {
+        setTimeout(() => {
+          slots[i].textContent = num;
+          slots[i].classList.add('drawn');
+        }, i * 700);
+      });
+      // 보너스
+      setTimeout(() => {
+        slots[6].textContent = bonus;
+        slots[6].classList.add('drawn');
+      }, 6 * 700);
+    });
+  </script>
+</body>
+</html>
