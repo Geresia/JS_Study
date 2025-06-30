@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        #myCanvas{
+            border: 1px solid blue;
+        }
+
+
+    </style>
+
+    <script>
+        const GAMEPAN_WIDTH = 600;
+        const GAMEPAN_HEIGHT = 400;
+
+        let ctx = null;
+        let timer = null;
+
+        //공의 좌표정보
+        let ball_x = GAMEPAN_WIDTH  /2;
+        let ball_y = GAMEPAN_HEIGHT /2;
+
+        let ball_radius=20;
+
+        //공의 방향
+        let bRight = true; //좌우
+        let bDown = true; //상하
+
+
+        window.onload = function(){
+
+            const myCanvas = document.getElementById("myCanvas");
+            ctx = myCanvas.getContext("2d");
+
+            //사용자 함수
+            startTimer();
+
+        };
+
+        function startTimer(){
+            if(timer==null){
+                // 100 : 초당10회 10FPS
+                timer = setInterval(timerProc,0.00001);
+            }
+        }
+
+        function stopTimer(){
+            clearInterval(timer);
+            timer = null;       
+        }
+
+        function timerProc(){
+            move_ball();
+
+            ctx.clearRect(0,0,GAMEPAN_WIDTH,GAMEPAN_HEIGHT);
+
+            draw_ball();
+        }
+        const move_gan = 2;
+        function move_ball() {
+
+            //좌우 이동
+            if (bRight) {
+                ball_x += move_gan;
+            } else {
+                ball_x -= move_gan;
+            }
+            // 우측벽 체크
+            if ((ball_x + ball_radius) > GAMEPAN_WIDTH) {
+                bRight = false;
+            }
+             if ((ball_x - ball_radius) < 0) {
+                bRight = true;
+            }
+
+            if (bDown) {
+                ball_y += move_gan;
+            } else {
+                ball_y -= move_gan;
+            }
+
+            if ((ball_y + ball_radius) > GAMEPAN_HEIGHT) {
+                bDown = false;
+            }
+             if ((ball_y - ball_radius) < 0) {
+                bDown = true;
+            }
+        }
+
+
+        function draw_ball(){
+
+
+            var radgrad = ctx.createRadialGradient(ball_x-10, ball_y-10, 0, ball_x-10, ball_y-10, ball_radius*1.5);
+
+            radgrad.addColorStop(0, 'white');
+            radgrad.addColorStop(1, 'cyan');
+
+            ctx.fillStyle = radgrad;
+
+            ctx.beginPath();
+
+            ctx.arc(ball_x, ball_y, ball_radius, 0, Math.PI * 2, true);
+
+            ctx.fill();
+        }
+
+
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="400">지원하지 않습니다</canvas>
+</body>
+</html>

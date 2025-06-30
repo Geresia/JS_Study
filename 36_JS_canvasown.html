@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Canvas 태극기</title>
+  <style>
+    body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #eee; }
+    canvas { border: 1px solid #333; }
+  </style>
+</head>
+<body>
+  <canvas id="flag" width="450" height="300"></canvas>
+  <script>
+    const c = document.getElementById("flag");
+    const ctx = c.getContext("2d");
+
+    // 1) 배경: 흰색 (기본 배경이므로 생략 가능)
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    // 2) 태극 문양
+    const cx = c.width/2, cy = c.height/2;  // 중심 좌표
+    const R = 60;                            // 반지름
+    // 상—적색 반원
+    ctx.beginPath();
+    ctx.fillStyle = "#c60c30";  // 태극기 빨강
+    ctx.arc(cx, cy, R, 0.5*Math.PI, 1.5*Math.PI, false);
+    ctx.lineTo(cx, cy);
+    ctx.fill();
+    // 하—청색 반원
+    ctx.beginPath();
+    ctx.fillStyle = "#003478";  // 태극기 파랑
+    ctx.arc(cx, cy, R, 1.5*Math.PI, 0.5*Math.PI, false);
+    ctx.lineTo(cx, cy);
+    ctx.fill();
+    // 작은 원: 파랑 위 적색
+    ctx.beginPath();
+    ctx.fillStyle = "#c60c30";
+    ctx.arc(cx, cy - R/2, R/2, 0, 2*Math.PI);
+    ctx.fill();
+    // 작은 원: 빨강 위 청색
+    ctx.beginPath();
+    ctx.fillStyle = "#003478";
+    ctx.arc(cx, cy + R/2, R/2, 0, 2*Math.PI);
+    ctx.fill();
+
+    // 3) 네 모서리 4괘 그리기 함수
+    function drawTrigram(x, y, pattern, rotate=0) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotate);
+      ctx.fillStyle = "black";
+      const barW = 10, barH = 40, gap = 8;
+      for (let i = 0; i < 3; i++) {
+        // pattern: [true, false, true] 같은 배열로 단일/이중 선 여부 지정
+        if (pattern[i]) {
+          ctx.fillRect(-barW/2, (i - 1)* (barH + gap), barW, barH);
+        } else {
+          // 이중선: 위아래로 바
+          ctx.fillRect(-barW - 4, (i - 1)*(barH+gap), barW, barH);
+          ctx.fillRect(4,      (i - 1)*(barH+gap), barW, barH);
+        }
+      }
+      ctx.restore();
+    }
+
+    // 각 괘의 패턴 및 위치
+    // 건(☰) – 좌상(45,45)
+    drawTrigram(45, 45, [true,true,true], 0);
+    // 이(☵) – 우상(405,45)
+    drawTrigram(405, 45, [true,false,true], Math.PI);
+    // 리(☲) – 좌하(45,255)
+    drawTrigram(45, 255, [true,false,true], Math.PI/2);
+    // 곤(☷) – 우하(405,255)
+    drawTrigram(405, 255, [false,false,false], -Math.PI/2);
+  </script>
+</body>
+</html>

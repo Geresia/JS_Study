@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        canvas{
+            border: 1px solid blue;
+            margin: 30px;
+        }
+    </style>
+
+    <script>
+        let ctx = null;
+
+        // let image1 = new Image();        // ① 생성
+        // image1.src = "./image/html공돌이.png";
+        
+        window.onload = function() {
+            const myCanvas = document.getElementById("myCanvas");
+            const ctx = myCanvas.getContext("2d");
+
+            // 그림자 효과용 어긋난 검정 텍스트
+            ctx.font = "30px 굴림체";
+            ctx.fillStyle = "black";
+            ctx.fillText("Canvas그리기연습", 101, 51);
+
+            // 실제 빨간 텍스트
+            ctx.fillStyle = "red";
+            ctx.fillText("Canvas그리기연습", 100, 50);
+
+            // 파란 테두리 텍스트
+            ctx.strokeStyle = "blue";
+            ctx.font = "20px 굴림체";
+            ctx.strokeText("각종도형및 그림을 출력합니다", 100, 90);
+
+            // 사각형 채우기
+            ctx.fillStyle = "red";
+            ctx.fillRect(10, 150, 100, 100);
+
+            // 사각형 테두리
+            ctx.strokeStyle = "blue";
+            ctx.strokeRect(120, 150, 100, 100);
+
+            //원그리기 //채워진
+            ctx.beginPath();
+            ctx.arc(280,200,50,0,Math.PI/180*180,true);
+            ctx.fill();
+
+            //테두리만
+            ctx.beginPath();
+            ctx.arc(280,200,50,0,Math.PI/180*360,true);
+            ctx.stroke();
+
+            
+            //이미지 출력
+            // ctx.drawImage(image1, 10, 300, 200, 200);
+
+            image1 = new Image();
+            image1.src = "./image/html공돌이.png"
+            image2 = new Image();
+            image2.src = "./image/출근공돌이.png"
+
+            image1.onload = function(){
+                ctx.drawImage(image1,10,280, 200, 200);
+
+                
+
+                // ctx.drawImage(image1,0,0,286,303,310,280,100,120);
+            }
+            image2.onload = function(){
+            ctx.drawImage(image2,250,280, 200, 200);
+            }
+        };
+</script>
+
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500" height="500">
+        현재브라우져에서는 지원되지 않습니다
+    </canvas>
+    
+</body>
+
+</html>
