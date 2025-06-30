@@ -68,8 +68,7 @@ class Lotto {
             if(this.win_no[6]==this.user_no[i]){
                 rank = 2;
                 bonus=this.win_no[6];
-                break;
-            }
+                }
         }
     }
     return {
