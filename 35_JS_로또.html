@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
-
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
 
-        #box{
-            width:372px;
+        #box {
+            width: 372px;
             margin: auto;
         }
 
-        .win-no{
-           display: inline-block;
-           width: 50px;
-           height: 50px;
-           background-color: black;
-           color:white;
-           font-size: 30px;
-           font-weight: bold;
-           text-align: center;
-           border-radius: 50%;
-           box-shadow: 5px;
+        .win-no {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 50%;
+            box-shadow: 5px;
         }
 
-        .bonus{
+        .user-no {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 30px;
+            margin-right: 5.82px;
+            border-radius: 50%;
+        }
+
+        .bonus {
             background-color: grey;
-            color:gold ;
+            color: gold;
         }
 
-        input[type='button']{
+        input[type='button'] {
             width: 100%;
         }
     </style>
@@ -44,17 +53,19 @@
 
     <script>
 
+
+        const regular_lotto_no = /^([1-9]{1}|[1-3][0-9]|[4][0-5])$/;
         const lotto = new Lotto();
-        function fn_result(){
+        function fn_result() {
 
             const win_no = lotto.getWinNo();//[12,16,19,22,34,44,7];
 
             const span_win_no_array = document.getElementsByClassName("win-no");
 
-            for(let i=0;i<span_win_no_array.length;i++){
+            for (let i = 0; i < span_win_no_array.length; i++) {
                 span_win_no_array[i].innerHTML = win_no[i];
             }
-            
+
             // span_win_no_array[1].innerHTML = win_no[1];
             // span_win_no_array[2].innerHTML = win_no[2];
             // span_win_no_array[3].innerHTML = win_no[3];
@@ -65,23 +76,96 @@
 
         }
 
+        function fn_result_user_no() {
+
+            const input_user_no_array = document.getElementsByClassName("user-no");
+            const user_no = [];//빈배열
+            for (let i = 0; i < input_user_no_array.length; i++) {
+
+                let no = input_user_no_array[i].value;
+                if (regular_lotto_no.test(no) == false) {
+                    alert("1-45의 숫자만")
+                    input_user_no_array[i].value = "";
+                    input_user_no_array[i].focus();
+                    return;
+                }
+
+                //중복수 체크:배열안에 no값이 포함되어있냐?
+                if (user_no.includes(no)) {
+                    alert("이미값이 포함되어있습니다!");
+                    input_user_no_array[i].value = "";
+                    input_user_no_array[i].focus();
+
+                    return;
+                }
+
+                user_no.push(no);
+                
+                lotto.user_no = user_no;
+                let result = lotto.checkRank();
+                // return {"rank":1, "count":6, "bonus":0};
+                let result_content = "";
+                if (result.count < 3) {
+                    result_content = "꽝!! 입니다";
+                } else {
+                        result_content = `
+                        등수: ${result.rank}<br>
+                        맞은 갯수: ${result.count}<br>
+                        보너스 번호: ${result.bonus}<br>
+
+                    `;
+                    // if(result.rank == 2){
+                    //     result_content += `보너스 번호:${ result.bonus }`
+                    // }
+                }
+
+                 document.getElementById("result_user_no").innerHTML = result_content;
+                
+
+            }
+
+            lotto.user_no = user_no;
+        }
+        
+
         // console.log( Math.floor(Math.random()*45) + 1);
     </script>
 </head>
+
 <body>
-<div id="box">
-    <div>
-        <span class="win-no">1</span>
-        <span class="win-no">2</span>
-        <span class="win-no">3</span>
-        <span class="win-no">4</span>
-        <span class="win-no">5</span>
-        <span class="win-no">6</span>
-        <span class="win-no bonus">7</span>
+    <div id="box">
+        <div>
+            <span class="win-no">1</span>
+            <span class="win-no">2</span>
+            <span class="win-no">3</span>
+            <span class="win-no">4</span>
+            <span class="win-no">5</span>
+            <span class="win-no">6</span>
+            <span class="win-no bonus">7</span>
+        </div>
+        <div>
+            <input type="button" value="로또추첨하기" onclick="fn_result();">
+        </div>
+
+        <hr>
+        <br><br><br><br>
+
+        <div>
+            <input class="user-no" type="text" value="1">
+            <input class="user-no" type="text" value="2">
+            <input class="user-no" type="text" value="3">
+            <input class="user-no" type="text" value="4">
+            <input class="user-no" type="text" value="5">
+            <input class="user-no" type="text" value="6">
+        </div>
+
+        <div>
+            <input type="button" value="당첨번호확인하기" onclick="fn_result_user_no();">
+        </div>
+
+        <div id="result_user_no">추첨결과입니다</div>
+
     </div>
-    <div>
-        <input type="button" value="로또추첨하기" onclick="fn_result();">
-    </div>
-</div>        
 </body>
+
 </html>
