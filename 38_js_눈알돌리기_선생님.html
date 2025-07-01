@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            margin: 0;
+        }
+
+        #myCanvas{
+
+            border:1px solid blue;
+            margin: 100px;
+
+        }
+    </style>
+
+    <script>
+
+        const GAMEPAN_WIDTH  = 498;
+        const GAMEPAN_HEIGHT = 353;
+
+        //배경이미지
+        let back_img = new Image();
+        back_img.src = "./image/사수케.PNG";
+
+        let back_img_off = new Image();
+        back_img_off.src = "./image/사수케눈감아.png";
+
+        let bLeftEyeInPt = false; // 왼쪽눈안에 마우스 포인터가 들어왔냐?
+
+        let myCanvas=null;
+        let ctx=null; //그리기도구
+
+
+        //눈의 정보
+        //왼쪽눈의 중심좌표
+        let left_eye_x;
+        let left_eye_y;
+        
+        //오른쪽눈의 중심좌표
+        let right_eye_x;
+        let right_eye_y;
+
+
+        //눈의 반지름
+        let eye_radius;
+
+
+        //눈알의 정보
+        //왼쪽눈알의 중심좌표
+        let left_eyeball_x;
+        let left_eyeball_y;
+        
+        //오른쪽눈알의 중심좌표
+        let right_eyeball_x;
+        let right_eyeball_y;
+
+        //눈의 반지름
+        let eyeball_radius;
+
+
+        //마우스가 클릭상태냐?
+        let bClick=false;
+
+
+       
+        //초기화이벤트
+        window.onload = function(){
+
+            myCanvas = document.getElementById("myCanvas");
+            //Canvas크기 조정
+            myCanvas.width = GAMEPAN_WIDTH ;
+            myCanvas.height= GAMEPAN_HEIGHT;
+
+            //그리기 도구
+            ctx = myCanvas.getContext("2d");
+
+            //눈의 위치를 초기화
+            init_eye_position();
+
+            //눈알의 위치 초기화
+            init_eyeball_position();
+
+            //마우스 이벤트의 사용자 함수
+            on_canvas_mousedown();
+            on_canvas_mousemove();
+            on_canvas_mouseup();
+
+            //그리기함수
+            draw();
+
+        };//end:window.onload()
+
+
+        function draw(){
+
+            //이전화면 지우기
+            // ctx.clearRect(0,0,GAMEPAN_WIDTH,GAMEPAN_HEIGHT);
+
+            // 배경이미지 그리기
+            
+
+            //눈그리기왼쪽눈안에 마우스 포인터 보여주라
+            if(bLeftEyeInPt==true){
+
+                ctx.drawImage(back_img_off,0,0);
+                return;
+            }
+            ctx.drawImage(back_img, 0, 0);
+            ctx.fillStyle = "white";  //면색상
+            ctx.strokeStyle="black";  //선색상
+
+            //왼쪽
+            ctx.beginPath();
+            //           x          y          r      
+            ctx.arc(left_eye_x,left_eye_y,eye_radius,0,Math.PI*2,true);
+            ctx.fill();
+            ctx.stroke();
+            
+            //오른쪽
+            ctx.beginPath();
+            ctx.arc(right_eye_x,right_eye_y,eye_radius,0,Math.PI*2,true);
+            ctx.fill();
+            ctx.stroke();
+
+            //눈알 그리기
+            ctx.fillStyle="red";
+
+            // //왼쪽눈알
+            // ctx.beginPath();
+            // ctx.arc(left_eyeball_x,left_eyeball_y,eyeball_radius,0,Math.PI*2,true);
+            // ctx.fill();
+            
+            // //오른쪽눈알
+            // ctx.beginPath();
+            // ctx.arc(right_eyeball_x,right_eyeball_y,eyeball_radius,0,Math.PI*2,true);
+            // ctx.fill();
+            drawAmaterasuEye(left_eyeball_x, left_eyeball_y, eyeball_radius);
+            drawAmaterasuEye(right_eyeball_x, right_eyeball_y, eyeball_radius);
+            
+        }//end:draw()
+
+
+        function init_eye_position(){
+            //왼쪽눈
+            left_eye_x = 139;
+            left_eye_y = 160;
+
+            //오른쪽눈
+            right_eye_x = 330;
+            right_eye_y = 160;
+
+            //눈의 반지름
+            eye_radius = GAMEPAN_WIDTH/10 - 30;
+
+        }//end:init_eye_position()
+
+        function init_eyeball_position(){
+            
+            left_eyeball_x = 139;
+            left_eyeball_y = 160;
+
+            right_eyeball_x = 330;
+            right_eyeball_y = 160;
+
+            //눈알의 크기
+            eyeball_radius = eye_radius/2.2;
+
+
+        }//end:init_eyeball_position()
+
+
+        function move_left_eyeball_position(mx,my){
+
+            let x = mx - left_eye_x;//밑변
+            let y = my - left_eye_y;//높이
+
+            let r = Math.sqrt(x*x + y*y); // x**2 + y**2
+
+            //bLeftEyeInPt = r<=eye_radius;
+
+            if(r<eye_radius)
+                bLeftEyeInPt = true;
+            else
+                bLeftEyeInPt = false;
+
+            let rate = eyeball_radius / r; //빗변의 비율
+
+            left_eyeball_x = left_eye_x + (x * rate);
+            left_eyeball_y = left_eye_y + (y * rate);
+            
+
+
+        }//end:move_left_eyeball_position()
+
+            function move_right_eyeball_position(mx, my) {
+                const dx   = mx - right_eye_x;                   // x 변위
+                const dy   = my - right_eye_y;                   // y 변위
+                const dist = Math.sqrt(dx * dx + dy * dy);       // 빗변(거리) 계산
+                const rate = eyeball_radius / dist;              // 비율 계산
+
+                right_eyeball_x = right_eye_x + dx * rate;
+                right_eyeball_y = right_eye_y + dy * rate;
+            }
+        function on_canvas_mousedown(){
+            //마우스이벤트
+            myCanvas.onmousedown = function(event){
+                //body기준좌표
+                // console.log("clientX",event.clientX);
+                // console.log("clientY",event.clientY);
+                //Canvas기준좌표
+                // console.log("offsetX",event.offsetX);
+                // console.log("offsetY",event.offsetY);
+                
+
+                bClick=true;
+
+                // Canvas를 기준으로 설정된 좌표
+                let mx = event.offsetX;
+                let my = event.offsetY;                         
+                let dx = event.offsetX;
+                let dy = event.offsetY;                         
+
+                //왼쪽눈알의 좌표 구한다
+                move_left_eyeball_position(mx,my);
+                draw();
+                move_right_eyeball_position(mx,my);
+                
+                draw();
+
+            }; 
+        }
+
+        function on_canvas_mousemove(){
+            //마우스이벤트
+            myCanvas.onmousemove = function(event){
+                //console.log(event);
+
+                //마우스가 클릭되지 않았으면 끝내라...
+                if(bClick==false)return;
+                
+
+                // Canvas를 기준으로 설정된 좌표
+                let mx = event.offsetX;
+                let my = event.offsetY;                         
+                let dx = event.offsetX;
+                let dy = event.offsetY;                         
+
+                //왼쪽눈알의 좌표 구한다
+                move_left_eyeball_position(mx,my);
+                draw();
+                move_right_eyeball_position(mx,my);
+                
+                draw();
+
+            }; 
+        }
+
+        function on_canvas_mouseup(){
+            //마우스이벤트
+            window.onmouseup = function(event){
+                //console.log(event);
+                //초기위치로 설정 
+                bClick=false;
+                bLeftEyeInPt=false;
+                init_eyeball_position();
+                draw();
+
+            }; 
+        }
+        function drawAmaterasuEye(cx, cy, r) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.fillStyle = "red";
+            const spikes = 12;
+            for (let i = 0; i < spikes; i++) {
+                const angle = (Math.PI*2 / spikes) * i;
+                const inner = r * 0.5;
+                const outer = r;
+                ctx.beginPath();
+                ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+                ctx.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+                ctx.lineTo(
+                    Math.cos(angle + Math.PI*2/spikes) * inner,
+                    Math.sin(angle + Math.PI*2/spikes) * inner
+                );
+                ctx.closePath();
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+
+
+    </script>
+
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+</body>
+</html>

@@ -32,6 +32,10 @@
         let bRight = true; //좌우
         let bDown = true; //상하
 
+        //공의 색상
+        let ballColor = "cyan";  // 기본 색상
+
+        
 
         window.onload = function(){
 
@@ -40,6 +44,50 @@
 
             //사용자 함수
             startTimer();
+
+        };
+
+        //키보드 이벤트
+        window.onkeydown = function(event){
+            console.log(event.code);
+
+            if(event.code == "KeyS"){
+                startTimer();
+            }
+
+            if(event.code == "KeyX"){
+                stopTimer();
+            }
+
+            if (event.code === "KeyR") {
+                changeColor("red");
+            }
+            if (event.code === "KeyG") {
+                changeColor("green");
+            }
+            if (event.code === "KeyB") {
+                changeColor("blue");
+            }
+            if (event.code === "KeyY") {
+                changeColor("yellow");
+            //방향제어
+            }
+            if (event.code === "NumpadAdd" || event.code === "Equal") {
+                sizeUp();
+                return;
+            }
+            if (event.code === "NumpadSubtract" || event.code === "Minus") {
+                sizeDown();
+                return;
+            }
+            switch(event.code)
+            {
+                case "ArrowRight": bRight=true; break;
+                case "ArrowLeft": bRight=false; break;
+                case "ArrowUp": bDown=false; break;
+                case "ArrowDown": bDown=true; break;
+            }
+        
 
         };
 
@@ -91,8 +139,11 @@
              if ((ball_y - ball_radius) < 0) {
                 bDown = true;
             }
+            
         }
-
+         function changeColor(c) {
+            ballColor = c;
+        }
 
         function draw_ball(){
 
@@ -100,7 +151,7 @@
             var radgrad = ctx.createRadialGradient(ball_x-10, ball_y-10, 0, ball_x-10, ball_y-10, ball_radius*1.5);
 
             radgrad.addColorStop(0, 'white');
-            radgrad.addColorStop(1, 'cyan');
+            radgrad.addColorStop(1, ballColor);
 
             ctx.fillStyle = radgrad;
 
@@ -110,11 +161,30 @@
 
             ctx.fill();
         }
+        function sizeUp() {
+        ball_radius += 5;               // 반경 5px씩 증가
+        if (ball_radius > 100)          // 최대 100px로 제한
+            ball_radius = 100;
+        }
 
+        function sizeDown() {
+        ball_radius -= 5;               // 반경 5px씩 감소
+        if (ball_radius < 5)            // 최소 5px로 제한
+            ball_radius = 5;
+        }
 
     </script>
 </head>
 <body>
     <canvas id="myCanvas" width="600" height="400">지원하지 않습니다</canvas>
+
+    <div>
+        시작 : S<br>
+        정지 : X<br>
+        방향전환 : 방향키버튼<br>
+        공의 크기를 크게 : +(NumberPadAdd) or = (Equal)<br>
+        공의 크기를 작게 : -(NumberPadSubtract) or = (Minus)<br>
+        공의 색상변경 : R(red) G(green) B(blue) Y(yellow)<br>
+    </div>
 </body>
 </html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            margin: 0;
+        }
+
+        #myCanvas{
+            border:1px solid blue;
+            margin: 100px;
+        }
+    </style>
+
+    <script>
+        const GAMEPAN_WIDTH  = 400;
+        const GAMEPAN_HEIGHT = 600;
+
+        let myCanvas = null;
+        let ctx = null; // 그리기도구
+
+        // 눈의 정보
+        let left_eye_x, left_eye_y;
+        let right_eye_x, right_eye_y;
+        let eye_radius;
+
+        // 눈알의 정보
+        let left_eyeball_x, left_eyeball_y;
+        let right_eyeball_x, right_eyeball_y;
+        let eyeball_radius;
+
+        window.onload = function() {
+            myCanvas = document.getElementById("myCanvas");
+            myCanvas.width  = GAMEPAN_WIDTH;
+            myCanvas.height = GAMEPAN_HEIGHT;
+            ctx = myCanvas.getContext("2d");
+
+            init_eye_position();
+            init_eyeball_position();
+
+            on_canvas_mousedown();
+            on_canvas_mousemove();
+            on_canvas_mouseup();
+
+            draw();
+        }; // end: window.onload
+
+        function draw() {
+            ctx.clearRect(0, 0, GAMEPAN_WIDTH, GAMEPAN_HEIGHT);
+
+            // 눈 그리기
+            ctx.fillStyle   = "white";
+            ctx.strokeStyle = "black";
+
+            ctx.beginPath();
+            ctx.arc(left_eye_x, left_eye_y, eye_radius, 0, Math.PI*2, true);
+            ctx.fill(); ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(right_eye_x, right_eye_y, eye_radius, 0, Math.PI*2, true);
+            ctx.fill(); ctx.stroke();
+
+            // 아마테라스 스타일 눈알 그리기
+                drawAmaterasuEye(left_eyeball_x, left_eyeball_y, eyeball_radius);
+                drawAmaterasuEye(right_eyeball_x, right_eyeball_y, eyeball_radius);
+        }
+
+        function drawAmaterasuEye(cx, cy, r) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.fillStyle = "red";
+            const spikes = 12;
+            for (let i = 0; i < spikes; i++) {
+                const angle = (Math.PI*2 / spikes) * i;
+                const inner = r * 0.5;
+                const outer = r;
+                ctx.beginPath();
+                ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+                ctx.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+                ctx.lineTo(
+                    Math.cos(angle + Math.PI*2/spikes) * inner,
+                    Math.sin(angle + Math.PI*2/spikes) * inner
+                );
+                ctx.closePath();
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+
+        function init_eye_position() {
+            left_eye_x  = GAMEPAN_WIDTH / 4;
+            left_eye_y  = GAMEPAN_HEIGHT / 2;
+            right_eye_x = GAMEPAN_WIDTH / 4 * 3;
+            right_eye_y = GAMEPAN_HEIGHT / 2;
+            eye_radius  = GAMEPAN_WIDTH / 4 - 30;
+        }
+
+        function init_eyeball_position() {
+            left_eyeball_x  = left_eye_x;
+            left_eyeball_y  = left_eye_y;
+            right_eyeball_x = right_eye_x;
+            right_eyeball_y = right_eye_y;
+            eyeball_radius  = eye_radius / 2;
+        }
+
+        function move_left_eyeball_position(mx, my) {
+            const x = mx - left_eye_x;
+            const y = my - left_eye_y;
+            const r = Math.sqrt(x*x + y*y);
+            const rate = eyeball_radius / r;
+            left_eyeball_x = left_eye_x + x * rate;
+            left_eyeball_y = left_eye_y + y * rate;
+        }
+
+        function on_canvas_mousedown() {
+            myCanvas.onmousedown = function(event) {
+                const mx = event.offsetX;
+                const my = event.offsetY;
+                move_left_eyeball_position(mx, my);
+                draw();
+            };
+        }
+
+        function on_canvas_mousemove() {
+            myCanvas.onmousemove = function(event){};
+        }
+
+        function on_canvas_mouseup() {
+            myCanvas.onmouseup = function(event) {
+                init_eye_position();
+                draw();
+            };
+        }
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+</body>
+</html>
