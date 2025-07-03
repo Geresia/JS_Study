@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="./js/checksharp.js"></script>
+    <script src="./js/jumin.js"></script>
+    <style>
+        #box {
+            width: 500px;
+            margin: auto;
+            margin-top: 50px;
+        }
+    </style>
+
+    <script>
+
+        const regular_jumin = /^[0-9]{2}([0][1-9]|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1])[-][1-8]\d{6}/;
+        function fn_result(){
+
+            // let jumin_no = document.getElementById("jumin_no").value;
+                let jumin_no = $("#jumin_no").val();
+
+            if(regular_jumin.test(jumin_no)==false){
+                alert("당신을 간첩 의심 및 공무원 집행 방해죄로 긴급 체포를 합니다")
+                // document.getElementById("jumin_no").value="";
+                $("#jumin_no").val("");
+                // document.getElementById("jumin_no").focus();
+                $("#jumin_no").focus();
+                return;
+            }
+        
+
+        //주민번호를 이용해서 각각의 부가정보추출(출생년도(간지)/나이/띠/성별/지역/계절)
+        //    객체명 =       객체(object)
+        const jumin = new Jumin(jumin_no);
+
+
+        if(jumin.isValid()==false){
+             alert("간...간첩이다!");
+             return;
+         }
+
+        
+        let year    = jumin.getYear();
+        let age     = jumin.getAge();
+        let tti     = jumin.getTti();
+        let gender  = jumin.getGender(); 
+        let season  = jumin.getSeason();
+        let ganji  = jumin.getGanji();
+        let location = jumin.getLocal();
+        // let generation = jumin.getgen();
+
+
+
+
+        //결과 출력
+
+        
+        // document.getElementById("year").innerHTML = year + ("년  ") + ganji;
+        // document.getElementById("age").innerHTML = age + "(살)";
+        // document.getElementById("tti").innerHTML = tti;
+        // document.getElementById("gender").innerHTML = gender;
+        // document.getElementById("local").innerHTML = location;
+        // document.getElementById("season").innerHTML = season;
+        $("#year").html(`${year}${ganji} 년생입니다`);
+        $("#age").html(age + "(살)");
+        $("#tti").html(tti);
+        $("#gender").html(gender);
+        $("#local").html(location);
+        $("#season").html(season);
+        //  
+
+        //유호성 체크
+        //jumin_no = "901312-1234567" 13월이 없음
+        }
+
+        // jQuery 방식으로 변환
+        $(document).ready(function(){
+            //결과보기 버튼 클릭 이벤트
+            //Attribute Selector 
+            $("input[value='결과보기']").click(function(){
+                fn_result();
+            });
+        }); //end: $(document).ready()
+        // alert(Number.isInteger('123'));
+
+    </script>
+
+
+</head>
+
+<body>
+    <form class="form-inline">
+        <div id="box">
+            <div style="text-align: center;">
+                주민번호:
+                <input class="form-control" id="jumin_no" placeholder="xxxxxx-xxxxxxx"
+                value="020618-3692927">
+                <input type="button" class="btn btn-primary" onclick="fn_result();" value="결과보기">
+            </div>
+            <hr>
+            <table class="table">
+                <!-- line -->
+                <tr>
+                    <th>출생년도:</th>
+                    <td><span id="year">1999(을사년)</span></td>
+                </tr>
+                <!-- line -->
+                <tr>
+                    <th>나이:</th>
+                    <td><span id="age">33(살)</span></td>
+                </tr>
+                <!-- line -->
+                <tr>
+                    <th>띠:</th>
+                    <td><span id="tti">뱀띠</span></td>
+                </tr>
+                <!-- line -->
+                <tr>
+                    <th>성별:</th>
+                    <td><span id="gender">남자</span></td>
+                </tr>
+                <!-- line -->
+                <tr>
+                    <th>출생지역:</th>
+                    <td><span id="local">서울</span></td>
+                </tr>
+                <tr>
+                    <th>출생계절:</th>
+                    <td><span id="season">봄</span></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+
+</html>
