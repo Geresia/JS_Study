@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>음식 주문</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      // 전체 선택 토글
+      $("#checkAll").click(function(){
+        const checked = $(this).prop("checked");
+        $("input[name='food']").prop("checked", checked);
+      });
+
+      // 하나씩 클릭할 때 전체 체크 상태 관리
+      $("input[name='food']").click(function(){
+        const total = $("input[name='food']").length;
+        const cnt   = $("input[name='food']:checked").length;
+        $("#checkAll").prop("checked", total === cnt);
+      });
+
+      // 주문하기 버튼 클릭
+      $("#orderBtn").click(function(){
+        const sel = $("input[name='food']:checked");
+        if (sel.length === 0) {
+          alert("메뉴를 최소 하나 선택해 주세요!");
+          return;
+        } else if(sel.length === 6){
+            alert("돼지");
+          return;
+        }
+        let result = "<h3>[주문한 메뉴]</h3>";
+        sel.each(function(i){
+          result += `메뉴 ${i+1} : ${this.value}<br>`;
+        });
+        $(".result").html(result);
+      });
+    });
+  </script>
+</head>
+<body>
+  <form>
+    <h3>점심 뭐 먹지?</h3>
+    <div><input type="checkbox" id="checkAll"> 전체 선택</div>
+    <hr>
+    <input type="checkbox" name="food" value="라면"> 라면<br>
+    <input type="checkbox" name="food" value="김밥"> 김밥<br>
+    <input type="checkbox" name="food" value="제육"> 제육<br>
+    <input type="checkbox" name="food" value="국밥"> 국밥<br>
+    <input type="checkbox" name="food" value="자장면"> 자장면<br>
+    <input type="checkbox" name="food" value="우동"> 우동<br>
+    <hr>
+    <input type="button" id="orderBtn" value="주문하기">
+  </form>
+  <hr>
+  <div class="result"></div>
+</body>
+</html>
